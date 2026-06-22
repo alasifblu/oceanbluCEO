@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OceanBlu — Team</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">
+    <span class="logo-text">ocean</span><span class="logo-box">Blu</span>
+    <span class="logo-tag">Team Intelligence</span>
+  </div>
+  <div class="header-right">
+    <div class="pill"><span class="dot"></span> Hermes Running</div>
+    <span class="clock" id="clock"></span>
+    <button class="btn" onclick="location.reload()">↺ Refresh</button>
+  </div>
+</header>
+<nav>
+  <a href="index.html">Dashboard</a>
+  <a href="projects.html">Projects</a>
+  <a href="tasks.html">Tasks</a>
+  <a href="team.html" class="active">Team</a>
+  <a href="pipeline.html">Pipeline</a>
+  <a href="reports.html">Reports</a>
+  <a href="settings.html">Settings</a>
+</nav>
+<main>
+
+<div class="slabel">Team Overview</div>
+<div class="metrics" style="margin-bottom:20px;">
+  <div class="metric"><div class="metric-label">Team Size</div><div class="metric-value v-blue">2</div><div class="metric-sub">Active members</div></div>
+  <div class="metric"><div class="metric-label">Admin Tier</div><div class="metric-value v-blue">1</div><div class="metric-sub">CEO only</div></div>
+  <div class="metric"><div class="metric-label">Employee Tier</div><div class="metric-value v-green">1</div><div class="metric-sub">Tahsin</div></div>
+  <div class="metric"><div class="metric-label">Open Slots</div><div class="metric-value v-amber">3</div><div class="metric-sub">Co-founders TBD</div></div>
+</div>
+
+<div class="grid-2">
+
+  <!-- CEO CARD -->
+  <div class="card" style="border-color:#1a6fff44;">
+    <div class="card-header">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="avatar av-ceo" style="width:48px;height:48px;font-size:16px;">SI</div>
+        <div>
+          <div style="font-size:16px;font-weight:600;color:#fff;">Md Al Asif Sarkar Sikhon</div>
+          <div style="font-size:12px;color:var(--blue-light);margin-top:2px;">Founder & CEO · OceanBlu Digital Ltd</div>
+        </div>
+      </div>
+      <span class="badge b-blue">ADMIN</span>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:16px;">
+      <div>
+        <table class="table">
+          <tr><td style="color:var(--text-muted);width:100px;">Location</td><td>Dhaka & Sylhet, BD</td></tr>
+          <tr><td style="color:var(--text-muted);">Discord ID</td><td style="font-size:11px;color:var(--blue-light);">1269613652475121725</td></tr>
+          <tr><td style="color:var(--text-muted);">Access</td><td style="color:var(--green);">Unrestricted</td></tr>
+          <tr><td style="color:var(--text-muted);">Commands</td><td style="color:var(--green);">All available</td></tr>
+        </table>
+      </div>
+      <div>
+        <div style="font-size:10px;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;">Current Focus</div>
+        <div class="alert a-red" style="margin-bottom:6px;font-size:11px;">🏢 NAAAS delivery — July 2026</div>
+        <div class="alert a-amber" style="margin-bottom:6px;font-size:11px;">⚖️ Legal registration — June 2026</div>
+        <div class="alert a-blue" style="font-size:11px;">🎯 $10K MRR via SaaS</div>
+      </div>
+    </div>
+
+    <div style="font-size:10px;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;">Active Projects</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">
+      <span class="badge b-red">NAAAS Ecosystem</span>
+      <span class="badge b-amber">Legal Registration</span>
+      <span class="badge b-blue">AI Review SaaS</span>
+      <span class="badge b-blue">Content Approval SaaS</span>
+      <span class="badge b-muted">BluLife OS</span>
+    </div>
+
+    <div style="font-size:10px;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;">CEO Notes (Private)</div>
+    <div id="ceo-notes"></div>
+    <div class="form-row">
+      <input type="text" id="ceo-note-inp" placeholder="Add private CEO note...">
+      <button class="btn btn-primary" onclick="addCeoNote()">Save</button>
+    </div>
+  </div>
+
+  <!-- TAHSIN CARD -->
+  <div class="card" style="border-color:#39d98a44;">
+    <div class="card-header">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="avatar av-emp" style="width:48px;height:48px;font-size:16px;">TH</div>
+        <div>
+          <div style="font-size:16px;font-weight:600;color:#fff;">Tahsin Hasan Tahabi</div>
+          <div style="font-size:12px;color:var(--green);margin-top:2px;">Graphic Designer · Creative Department</div>
+        </div>
+      </div>
+      <span class="badge b-green">EMPLOYEE</span>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:16px;">
+      <div>
+        <table class="table">
+          <tr><td style="color:var(--text-muted);width:100px;">Department</td><td>Creative</td></tr>
+          <tr><td style="color:var(--text-muted);">Reports to</td><td>Sikhon (CEO)</td></tr>
+          <tr><td style="color:var(--text-muted);">Access</td><td style="color:var(--amber);">Employee tier</td></tr>
+          <tr><td style="color:var(--text-muted);">Language</td><td>English + Bengali</td></tr>
+        </table>
+      </div>
+      <div>
+        <div style="font-size:10px;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;">Current Assignment</div>
+        <div class="alert a-red" style="font-size:11px;margin-bottom:6px;">🐛 Website bug fix — ASAP — No update</div>
+        <div class="alert a-blue" style="font-size:11px;">🎨 Creative assets — NAAAS branding</div>
+      </div>
+    </div>
+
+    <div style="font-size:10px;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;">Access Restrictions (Employee Tier)</div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="color:var(--red);">✕</span><span style="color:var(--text-secondary);">Financial data, revenue, invoices</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="color:var(--red);">✕</span><span style="color:var(--text-secondary);">Investor or equity details</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="color:var(--red);">✕</span><span style="color:var(--text-secondary);">CEO personal matters</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="color:var(--red);">✕</span><span style="color:var(--text-secondary);">Client contract values</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="color:var(--green);">✓</span><span style="color:var(--text-secondary);">Own task list and deadlines</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="color:var(--green);">✓</span><span style="color:var(--text-secondary);">Creative department tasks</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><span style="color:var(--green);">✓</span><span style="color:var(--text-secondary);">Deadline reminders from Hermes</span></div>
+    </div>
+
+    <div style="font-size:10px;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;">Performance Notes (CEO Only)</div>
+    <div id="tahsin-notes"></div>
+    <div class="form-row">
+      <input type="text" id="tahsin-note-inp" placeholder="Add performance note...">
+      <button class="btn btn-primary" onclick="addTahsinNote()">Save</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- OPEN SLOTS -->
+<div class="slabel" style="margin-top:24px;">Open Positions — Co-Founders TBD</div>
+<div class="grid-3" style="grid-template-columns:1fr 1fr 1fr;">
+  <div class="card" style="border-style:dashed;opacity:.6;">
+    <div style="text-align:center;padding:20px 0;">
+      <div style="font-size:28px;margin-bottom:8px;">+</div>
+      <div style="font-size:13px;font-weight:500;color:var(--text-secondary);">Co-Founder Slot 1</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Role TBD · Employee tier</div>
+    </div>
+  </div>
+  <div class="card" style="border-style:dashed;opacity:.6;">
+    <div style="text-align:center;padding:20px 0;">
+      <div style="font-size:28px;margin-bottom:8px;">+</div>
+      <div style="font-size:13px;font-weight:500;color:var(--text-secondary);">Co-Founder Slot 2</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Role TBD · Employee tier</div>
+    </div>
+  </div>
+  <div class="card" style="border-style:dashed;opacity:.6;">
+    <div style="text-align:center;padding:20px 0;">
+      <div style="font-size:28px;margin-bottom:8px;">+</div>
+      <div style="font-size:13px;font-weight:500;color:var(--text-secondary);">Co-Founder Slot 3</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Role TBD · Employee tier</div>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer>OceanBlu Digital Ltd · Trust Built Grow · Hermes CEO Hub</footer>
+<script>
+function updateClock(){const now=new Date();const b=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Dhaka'}));const p=n=>n.toString().padStart(2,'0');document.getElementById('clock').textContent=`${p(b.getHours())}:${p(b.getMinutes())}:${p(b.getSeconds())} BST`;}
+updateClock();setInterval(updateClock,1000);
+
+function noteWidget(key,inpId,containerId,addFn){
+  let notes=JSON.parse(localStorage.getItem(key))||[];
+  window[addFn]=function(){
+    const v=document.getElementById(inpId).value.trim();
+    if(!v)return;
+    const d=new Date().toLocaleDateString('en-GB');
+    notes.unshift({date:d,text:v});
+    localStorage.setItem(key,JSON.stringify(notes));
+    render();
+    document.getElementById(inpId).value='';
+  };
+  function render(){
+    document.getElementById(containerId).innerHTML=notes.slice(0,5).map(n=>`
+      <div style="background:var(--navy-600);border-radius:6px;padding:8px 12px;margin-bottom:6px;font-size:12px;color:var(--text-secondary);">
+        <span style="color:var(--text-muted);font-size:10px;">${n.date}</span> — ${n.text}
+      </div>`).join('');
+  }
+  render();
+}
+noteWidget('ceo-notes','ceo-note-inp','ceo-notes','addCeoNote');
+noteWidget('tahsin-notes','tahsin-note-inp','tahsin-notes','addTahsinNote');
+</script>
+</body>
+</html>

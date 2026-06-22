@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OceanBlu — Reports</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">
+    <span class="logo-text">ocean</span><span class="logo-box">Blu</span>
+    <span class="logo-tag">Hermes Report Archive</span>
+  </div>
+  <div class="header-right">
+    <div class="pill"><span class="dot"></span> Hermes Running</div>
+    <span class="clock" id="clock"></span>
+    <button class="btn" onclick="location.reload()">↺ Refresh</button>
+  </div>
+</header>
+<nav>
+  <a href="index.html">Dashboard</a>
+  <a href="projects.html">Projects</a>
+  <a href="tasks.html">Tasks</a>
+  <a href="team.html">Team</a>
+  <a href="pipeline.html">Pipeline</a>
+  <a href="reports.html" class="active">Reports</a>
+  <a href="settings.html">Settings</a>
+</nav>
+<main>
+
+<div class="slabel">Report Metrics</div>
+<div class="metrics" style="margin-bottom:20px;">
+  <div class="metric"><div class="metric-label">Total Reports</div><div class="metric-value v-blue" id="m-total">0</div></div>
+  <div class="metric"><div class="metric-label">Daily Reports</div><div class="metric-value v-green" id="m-daily">0</div></div>
+  <div class="metric"><div class="metric-label">Weekly Reports</div><div class="metric-value v-blue" id="m-weekly">0</div></div>
+  <div class="metric"><div class="metric-label">Alerts Logged</div><div class="metric-value v-red" id="m-alerts">0</div></div>
+  <div class="metric"><div class="metric-label">Next Daily</div><div class="metric-value" style="font-size:14px;color:#fff;">9:00 AM</div><div class="metric-sub">BST daily</div></div>
+  <div class="metric"><div class="metric-label">Next Weekly</div><div class="metric-value" style="font-size:14px;color:#fff;">Sun 8PM</div><div class="metric-sub">BST weekly</div></div>
+</div>
+
+<div class="grid-main">
+
+  <!-- REPORT LIST -->
+  <div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <div class="slabel" style="margin:0;">Report Archive</div>
+      <div style="display:flex;gap:6px;">
+        <button class="btn" id="filter-all" onclick="filterReports('all',this)">All</button>
+        <button class="btn" id="filter-daily" onclick="filterReports('daily',this)">Daily</button>
+        <button class="btn" id="filter-weekly" onclick="filterReports('weekly',this)">Weekly</button>
+        <button class="btn" id="filter-alert" onclick="filterReports('alert',this)">Alerts</button>
+      </div>
+    </div>
+    <div id="report-list"></div>
+  </div>
+
+  <!-- ADD REPORT -->
+  <div>
+    <div class="slabel">Log New Report</div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Paste from Hermes Discord</span>
+        <span class="badge b-blue">Manual entry</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div>
+          <div style="font-size:10px;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;">Report Type</div>
+          <select id="rep-type" style="width:100%;background:var(--navy-600);border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:#fff;font-size:12px;outline:none;">
+            <option value="daily">Daily Report</option>
+            <option value="weekly">Weekly Report</option>
+            <option value="alert">Alert / Urgent</option>
+            <option value="manual">Manual Note</option>
+          </select>
+        </div>
+        <div>
+          <div style="font-size:10px;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;">Summary Title</div>
+          <input type="text" id="rep-title" placeholder="e.g. Daily report — June 21" style="width:100%;background:var(--navy-600);border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:#fff;font-size:12px;outline:none;font-family:'Inter',sans-serif;">
+        </div>
+        <div>
+          <div style="font-size:10px;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;">Report Content</div>
+          <textarea id="rep-body" rows="8" placeholder="Paste Hermes Discord report here..." style="width:100%;background:var(--navy-600);border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:#fff;font-size:12px;outline:none;font-family:'Inter',sans-serif;resize:vertical;"></textarea>
+        </div>
+        <div>
+          <div style="font-size:10px;letter-spacing:1px;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;">Tasks Completed (optional)</div>
+          <input type="text" id="rep-tasks" placeholder="e.g. 3 tasks completed, 2 pending" style="width:100%;background:var(--navy-600);border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:#fff;font-size:12px;outline:none;font-family:'Inter',sans-serif;">
+        </div>
+        <button class="btn btn-primary" onclick="addReport()">Save Report</button>
+      </div>
+    </div>
+
+    <!-- SCHEDULE REFERENCE -->
+    <div class="slabel" style="margin-top:20px;">Hermes Report Schedule</div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Auto Schedule</span></div>
+      <div class="row">
+        <div class="icon-box ib-green">📋</div>
+        <div class="row-info">
+          <div class="row-title">Daily CEO Report</div>
+          <div class="row-sub">Tasks done · Overdue · NAAAS status · Alerts</div>
+        </div>
+        <span class="badge b-green">9:00 AM BST</span>
+      </div>
+      <div class="row">
+        <div class="icon-box ib-blue">📊</div>
+        <div class="row-info">
+          <div class="row-title">Weekly Summary</div>
+          <div class="row-sub">Week review · Revenue · Priorities ahead</div>
+        </div>
+        <span class="badge b-blue">Sun 8PM BST</span>
+      </div>
+      <div class="row">
+        <div class="icon-box ib-amber">⚠️</div>
+        <div class="row-info">
+          <div class="row-title">Deadline Reminder</div>
+          <div class="row-sub">24h and 2h before each deadline</div>
+        </div>
+        <span class="badge b-amber">Auto</span>
+      </div>
+      <div class="row">
+        <div class="icon-box ib-red">🚨</div>
+        <div class="row-info">
+          <div class="row-title">CEO Alert</div>
+          <div class="row-sub">Triggered if task overdue 4h+</div>
+        </div>
+        <span class="badge b-red">Instant</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</main>
+<footer>OceanBlu Digital Ltd · Trust Built Grow · Hermes CEO Hub</footer>
+<script>
+function updateClock(){const now=new Date();const b=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Dhaka'}));const p=n=>n.toString().padStart(2,'0');document.getElementById('clock').textContent=`${p(b.getHours())}:${p(b.getMinutes())}:${p(b.getSeconds())} BST`;}
+updateClock();setInterval(updateClock,1000);
+
+let reports=JSON.parse(localStorage.getItem('ob-reports'))||[];
+let activeFilter='all';
+const typeBadge={daily:'b-green',weekly:'b-blue',alert:'b-red',manual:'b-muted'};
+const typeLabel={daily:'Daily',weekly:'Weekly',alert:'Alert',manual:'Note'};
+
+function renderReports(){
+  const filtered=reports.filter(r=>activeFilter==='all'||r.type===activeFilter);
+  const el=document.getElementById('report-list');
+  if(!filtered.length){
+    el.innerHTML=`<div style="background:var(--navy-700);border:1px solid var(--border);border-radius:12px;padding:40px;text-align:center;color:var(--text-muted);font-size:13px;">No reports yet. Paste your first Hermes report using the form →</div>`;
+    return;
+  }
+  el.innerHTML=filtered.map((r,i)=>`
+    <div style="background:var(--navy-700);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:10px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="badge ${typeBadge[r.type]||'b-muted'}">${typeLabel[r.type]||r.type}</span>
+          <span style="font-size:13px;font-weight:500;color:#fff;">${r.title}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:11px;color:var(--text-muted);">${r.date}</span>
+          <button onclick="delReport(${i})" style="background:transparent;border:none;color:var(--text-muted);cursor:pointer;font-size:14px;">✕</button>
+        </div>
+      </div>
+      ${r.tasks?`<div style="font-size:11px;color:var(--green);margin-bottom:8px;">✓ ${r.tasks}</div>`:''}
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.6;white-space:pre-wrap;">${r.body}</div>
+    </div>
+  `).join('');
+  document.getElementById('m-total').textContent=reports.length;
+  document.getElementById('m-daily').textContent=reports.filter(r=>r.type==='daily').length;
+  document.getElementById('m-weekly').textContent=reports.filter(r=>r.type==='weekly').length;
+  document.getElementById('m-alerts').textContent=reports.filter(r=>r.type==='alert').length;
+}
+
+function addReport(){
+  const title=document.getElementById('rep-title').value.trim();
+  const body=document.getElementById('rep-body').value.trim();
+  if(!title||!body)return;
+  reports.unshift({type:document.getElementById('rep-type').value,title,body,tasks:document.getElementById('rep-tasks').value.trim(),date:new Date().toLocaleDateString('en-GB')});
+  localStorage.setItem('ob-reports',JSON.stringify(reports));
+  renderReports();
+  ['rep-title','rep-body','rep-tasks'].forEach(id=>document.getElementById(id).value='');
+}
+
+function delReport(i){reports.splice(i,1);localStorage.setItem('ob-reports',JSON.stringify(reports));renderReports();}
+
+function filterReports(f,btn){
+  activeFilter=f;
+  document.querySelectorAll('.btn[id^="filter-"]').forEach(b=>b.classList.remove('btn-primary'));
+  btn.classList.add('btn-primary');
+  renderReports();
+}
+
+renderReports();
+</script>
+</body>
+</html>

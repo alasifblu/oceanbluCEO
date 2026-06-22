@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OceanBlu — CEO Operations Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy-900:#050d1e;
+  --navy-800:#0a0f1e;
+  --navy-700:#0d1526;
+  --navy-600:#111d35;
+  --navy-500:#1a2d4a;
+  --navy-400:#1e3a6e;
+  --blue:#1a6fff;
+  --blue-light:#4d8fff;
+  --blue-dim:#1a6fff22;
+  --green:#39d98a;
+  --amber:#f5c518;
+  --red:#ff4d4d;
+  --text-primary:#ffffff;
+  --text-secondary:#7a9cc4;
+  --text-muted:#3d5a7a;
+  --border:#1e3a6e55;
+}
+body{background:var(--navy-800);color:var(--text-primary);font-family:'Inter',sans-serif;font-size:14px;min-height:100vh;}
+
+/* HEADER */
+header{background:var(--navy-900);border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-text{font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:2px;color:#fff;}
+.logo-box{background:var(--blue);color:#fff;font-family:'Bebas Neue',cursive;font-size:22px;padding:0 6px;letter-spacing:2px;}
+.tagline{font-size:10px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-left:4px;}
+.header-right{display:flex;align-items:center;gap:16px;}
+.status-pill{display:flex;align-items:center;gap:6px;background:var(--navy-600);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:11px;color:var(--text-secondary);}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);}
+.dot.red{background:var(--red);box-shadow:0 0 6px var(--red);}
+.dot.amber{background:var(--amber);box-shadow:0 0 6px var(--amber);}
+.refresh-btn{background:var(--navy-600);border:1px solid var(--border);color:var(--text-secondary);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;transition:all .2s;}
+.refresh-btn:hover{border-color:var(--blue);color:var(--blue);}
+.time-display{font-size:11px;color:var(--text-muted);font-variant-numeric:tabular-nums;}
+
+/* NAV */
+nav{background:var(--navy-900);border-bottom:1px solid var(--border);padding:0 28px;display:flex;gap:0;overflow-x:auto;}
+nav a{display:block;padding:12px 16px;font-size:12px;color:var(--text-muted);text-decoration:none;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;}
+nav a:hover{color:var(--text-secondary);}
+nav a.active{color:var(--blue);border-bottom-color:var(--blue);}
+
+/* MAIN */
+main{padding:24px 28px;max-width:1400px;margin:0 auto;}
+
+/* SECTION LABEL */
+.section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;margin-top:24px;}
+.section-label:first-child{margin-top:0;}
+
+/* METRIC STRIP */
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:8px;}
+.metric{background:var(--navy-700);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+.metric-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:8px;}
+.metric-value{font-size:26px;font-weight:600;color:#fff;line-height:1;}
+.metric-value.green{color:var(--green);}
+.metric-value.amber{color:var(--amber);}
+.metric-value.red{color:var(--red);}
+.metric-value.blue{color:var(--blue-light);}
+.metric-sub{font-size:11px;color:var(--text-muted);margin-top:6px;}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.grid-3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px;}
+@media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr;}}
+
+/* CARD */
+.card{background:var(--navy-700);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.card-title{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-secondary);font-weight:500;}
+.card-badge{font-size:10px;padding:3px 8px;border-radius:4px;font-weight:500;letter-spacing:.5px;}
+.badge-critical{background:#ff4d4d22;color:var(--red);border:1px solid #ff4d4d33;}
+.badge-high{background:#f5c51822;color:var(--amber);border:1px solid #f5c51833;}
+.badge-ok{background:#39d98a22;color:var(--green);border:1px solid #39d98a33;}
+.badge-blue{background:var(--blue-dim);color:var(--blue-light);border:1px solid #1a6fff33;}
+
+/* PROJECT LIST */
+.project-item{padding:12px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;}
+.project-item:last-child{border-bottom:none;padding-bottom:0;}
+.project-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.p-critical{background:#ff4d4d15;border:1px solid #ff4d4d33;}
+.p-high{background:#f5c51815;border:1px solid #f5c51833;}
+.p-medium{background:#1a6fff15;border:1px solid #1a6fff33;}
+.project-info{flex:1;min-width:0;}
+.project-name{font-size:13px;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.project-meta{font-size:11px;color:var(--text-muted);margin-top:2px;}
+.project-status{font-size:11px;font-weight:500;white-space:nowrap;}
+.status-green{color:var(--green);}
+.status-amber{color:var(--amber);}
+.status-red{color:var(--red);}
+.status-blue{color:var(--blue-light);}
+
+/* PROGRESS BAR */
+.progress-wrap{margin-top:8px;}
+.progress-label{display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-bottom:5px;}
+.progress-bar{height:4px;background:var(--navy-500);border-radius:2px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:2px;transition:width .6s ease;}
+.fill-green{background:var(--green);}
+.fill-amber{background:var(--amber);}
+.fill-red{background:var(--red);}
+.fill-blue{background:var(--blue);}
+
+/* TASK LIST */
+.task-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.task-item:last-child{border-bottom:none;}
+.task-check{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--text-muted);flex-shrink:0;margin-top:1px;cursor:pointer;transition:all .2s;}
+.task-check.done{background:var(--green);border-color:var(--green);}
+.task-body{flex:1;}
+.task-title{font-size:13px;color:#fff;line-height:1.4;}
+.task-title.done{text-decoration:line-through;color:var(--text-muted);}
+.task-due{font-size:11px;color:var(--text-muted);margin-top:3px;}
+.task-due.overdue{color:var(--red);}
+.task-priority{font-size:10px;padding:2px 6px;border-radius:3px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+
+/* TEAM */
+.team-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.team-item:last-child{border-bottom:none;}
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;}
+.av-ceo{background:#1a6fff33;color:var(--blue-light);border:1.5px solid var(--blue);}
+.av-emp{background:#39d98a22;color:var(--green);border:1.5px solid var(--green);}
+.team-info{flex:1;}
+.team-name{font-size:13px;font-weight:500;color:#fff;}
+.team-role{font-size:11px;color:var(--text-muted);margin-top:2px;}
+.team-status{font-size:11px;color:var(--text-secondary);}
+
+/* CRON LOG */
+.cron-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);}
+.cron-item:last-child{border-bottom:none;}
+.cron-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.cron-text{flex:1;font-size:12px;color:var(--text-secondary);}
+.cron-time{font-size:11px;color:var(--text-muted);}
+
+/* ALERT BOX */
+.alert{border-radius:8px;padding:12px 14px;margin-bottom:10px;display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;}
+.alert:last-child{margin-bottom:0;}
+.alert-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+.alert-critical{background:#ff4d4d12;border:1px solid #ff4d4d33;color:#ff8888;}
+.alert-warn{background:#f5c51812;border:1px solid #f5c51833;color:#f5c518;}
+.alert-info{background:var(--blue-dim);border:1px solid #1a6fff33;color:var(--blue-light);}
+
+/* PIPELINE */
+.pipeline-item{padding:12px;background:var(--navy-600);border-radius:8px;margin-bottom:8px;border:1px solid var(--border);}
+.pipeline-item:last-child{margin-bottom:0;}
+.pipeline-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.pipeline-name{font-size:13px;font-weight:500;color:#fff;}
+.pipeline-amount{font-size:12px;color:var(--blue-light);font-weight:500;}
+.pipeline-stage{font-size:10px;letter-spacing:1px;color:var(--text-muted);text-transform:uppercase;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:16px 28px;text-align:center;font-size:11px;color:var(--text-muted);margin-top:40px;}
+
+/* ADD TASK */
+.add-task-form{display:flex;gap:8px;margin-top:14px;}
+.add-task-form input{flex:1;background:var(--navy-600);border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:#fff;font-size:12px;outline:none;transition:border-color .2s;}
+.add-task-form input:focus{border-color:var(--blue);}
+.add-task-form input::placeholder{color:var(--text-muted);}
+.add-task-form button{background:var(--blue);color:#fff;border:none;border-radius:6px;padding:8px 14px;cursor:pointer;font-size:12px;font-weight:500;transition:opacity .2s;}
+.add-task-form button:hover{opacity:.85;}
+
+.divider{height:1px;background:var(--border);margin:20px 0;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-text">ocean</span><span class="logo-box">Blu</span>
+    <span class="tagline">CEO Operations Hub</span>
+  </div>
+  <div class="header-right">
+    <div class="status-pill"><span class="dot"></span> Hermes Running</div>
+    <div class="status-pill"><span class="dot"></span> Discord Active</div>
+    <span class="time-display" id="clock"></span>
+    <button class="refresh-btn" onclick="location.reload()">↺ Refresh</button>
+  </div>
+</header>
+
+<nav>
+  <a href="index.html" class="active">Dashboard</a>
+  <a href="projects.html">Projects</a>
+  <a href="tasks.html">Tasks</a>
+  <a href="team.html">Team</a>
+  <a href="pipeline.html">Pipeline</a>
+  <a href="reports.html">Reports</a>
+</nav>
+
+<main>
+
+  <!-- ALERTS -->
+  <div class="section-label">Active Alerts</div>
+  <div id="alerts-wrap">
+    <div class="alert alert-critical">
+      <span class="alert-icon">⚠</span>
+      <span><strong>OceanBlu Website Bug Fix</strong> — assigned to Tahsin, marked ASAP. No update in 24h.</span>
+    </div>
+    <div class="alert alert-warn">
+      <span class="alert-icon">◉</span>
+      <span><strong>OceanBlu Legal Registration</strong> — deadline this month (June 2026). Confirm status.</span>
+    </div>
+    <div class="alert alert-info">
+      <span class="alert-icon">◈</span>
+      <span><strong>NAAAS Digital Ecosystem</strong> — contract starts July 2026. Pre-build phase active.</span>
+    </div>
+  </div>
+
+  <!-- METRICS -->
+  <div class="section-label" style="margin-top:24px;">Today's Snapshot — <span id="today-date"></span></div>
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-label">Tasks Today</div>
+      <div class="metric-value blue" id="tasks-total">0</div>
+      <div class="metric-sub" id="tasks-sub">Loading...</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Overdue</div>
+      <div class="metric-value red" id="tasks-overdue">0</div>
+      <div class="metric-sub">Needs attention</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Active Projects</div>
+      <div class="metric-value blue">6</div>
+      <div class="metric-sub">2 critical</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Hermes Status</div>
+      <div class="metric-value green">Live</div>
+      <div class="metric-sub">nemotron-3-super:free</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">MRR Target</div>
+      <div class="metric-value amber">$0</div>
+      <div class="metric-sub">Target: $10K MRR</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Team Active</div>
+      <div class="metric-value green">2</div>
+      <div class="metric-sub">Sikhon · Tahsin</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PROJECTS + TASKS -->
+  <div class="grid-3">
+
+    <!-- PROJECTS -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Active Projects</span>
+        <span class="card-badge badge-blue">6 running</span>
+      </div>
+
+      <div class="project-item">
+        <div class="project-icon p-critical">🏢</div>
+        <div class="project-info">
+          <div class="project-name">NAAAS Digital Ecosystem</div>
+          <div class="project-meta">Sikhon · July 2026</div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Pre-build</span><span>10%</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-red" style="width:10%"></div></div>
+          </div>
+        </div>
+        <span class="project-status status-red">CRITICAL</span>
+      </div>
+
+      <div class="project-item">
+        <div class="project-icon p-high">⚖️</div>
+        <div class="project-info">
+          <div class="project-name">Legal Registration</div>
+          <div class="project-meta">Sikhon · June 2026</div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>In Progress</span><span>40%</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-amber" style="width:40%"></div></div>
+          </div>
+        </div>
+        <span class="project-status status-amber">HIGH</span>
+      </div>
+
+      <div class="project-item">
+        <div class="project-icon p-high">🤖</div>
+        <div class="project-info">
+          <div class="project-name">AI Review SaaS</div>
+          <div class="project-meta">Sikhon · Q3 2026</div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Spec phase</span><span>5%</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-blue" style="width:5%"></div></div>
+          </div>
+        </div>
+        <span class="project-status status-blue">HIGH</span>
+      </div>
+
+      <div class="project-item">
+        <div class="project-icon p-high">✅</div>
+        <div class="project-info">
+          <div class="project-name">Content Approval SaaS</div>
+          <div class="project-meta">Sikhon · Q3 2026</div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Spec phase</span><span>5%</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-blue" style="width:5%"></div></div>
+          </div>
+        </div>
+        <span class="project-status status-blue">HIGH</span>
+      </div>
+
+      <div class="project-item">
+        <div class="project-icon p-medium">🏘️</div>
+        <div class="project-info">
+          <div class="project-name">BluLife Community OS</div>
+          <div class="project-meta">Sikhon · Ongoing</div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Outreach</span><span>15%</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-blue" style="width:15%"></div></div>
+          </div>
+        </div>
+        <span class="project-status status-blue">MED</span>
+      </div>
+
+      <div class="project-item">
+        <div class="project-icon p-medium">🐛</div>
+        <div class="project-info">
+          <div class="project-name">Website Bug Fix</div>
+          <div class="project-meta">Tahsin · ASAP</div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Pending</span><span>0%</span></div>
+            <div class="progress-bar"><div class="progress-fill fill-red" style="width:0%"></div></div>
+          </div>
+        </div>
+        <span class="project-status status-red">ASAP</span>
+      </div>
+    </div>
+
+    <!-- TASKS -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Task Board</span>
+        <span class="card-badge badge-ok" id="done-count">0 done</span>
+      </div>
+      <div id="task-list"></div>
+      <div class="add-task-form">
+        <input type="text" id="task-input" placeholder="Add task..." />
+        <button onclick="addTask()">+ Add</button>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <!-- TEAM -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Team</span>
+          <span class="card-badge badge-ok">2 active</span>
+        </div>
+        <div class="team-item">
+          <div class="avatar av-ceo">SI</div>
+          <div class="team-info">
+            <div class="team-name">Sikhon</div>
+            <div class="team-role">Founder & CEO · Admin</div>
+          </div>
+          <div class="team-status status-green">● Online</div>
+        </div>
+        <div class="team-item">
+          <div class="avatar av-emp">TH</div>
+          <div class="team-info">
+            <div class="team-name">Tahsin Hasan</div>
+            <div class="team-role">Graphic Designer</div>
+          </div>
+          <div class="team-status status-amber">● Employee</div>
+        </div>
+      </div>
+
+      <!-- HERMES CRON -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Hermes Schedule</span>
+          <span class="card-badge badge-ok">Active</span>
+        </div>
+        <div class="cron-item">
+          <div class="cron-dot" style="background:var(--green)"></div>
+          <div class="cron-text">Daily CEO Report</div>
+          <div class="cron-time">9:00 AM BST</div>
+        </div>
+        <div class="cron-item">
+          <div class="cron-dot" style="background:var(--green)"></div>
+          <div class="cron-text">Weekly Summary</div>
+          <div class="cron-time">Sun 8:00 PM BST</div>
+        </div>
+        <div class="cron-item">
+          <div class="cron-dot" style="background:var(--amber)"></div>
+          <div class="cron-text">Deadline reminder (24h)</div>
+          <div class="cron-time">Auto</div>
+        </div>
+        <div class="cron-item">
+          <div class="cron-dot" style="background:var(--amber)"></div>
+          <div class="cron-text">Deadline reminder (2h)</div>
+          <div class="cron-time">Auto</div>
+        </div>
+        <div class="cron-item">
+          <div class="cron-dot" style="background:var(--red)"></div>
+          <div class="cron-text">CEO alert (4h+ overdue)</div>
+          <div class="cron-time">Auto</div>
+        </div>
+      </div>
+
+      <!-- PIPELINE -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Business Pipeline</span>
+          <span class="card-badge badge-blue">New biz</span>
+        </div>
+        <div class="pipeline-item">
+          <div class="pipeline-top">
+            <span class="pipeline-name">NAAAS Holdings</span>
+            <span class="pipeline-amount">Anchor Client</span>
+          </div>
+          <div class="pipeline-stage">Contract · July 2026</div>
+        </div>
+        <div class="pipeline-item">
+          <div class="pipeline-top">
+            <span class="pipeline-name">AI Review SaaS</span>
+            <span class="pipeline-amount">MRR Target</span>
+          </div>
+          <div class="pipeline-stage">Product · Q3 2026</div>
+        </div>
+        <div class="pipeline-item">
+          <div class="pipeline-top">
+            <span class="pipeline-name">Content Approval SaaS</span>
+            <span class="pipeline-amount">MRR Target</span>
+          </div>
+          <div class="pipeline-stage">Product · Q3 2026</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  OceanBlu Digital Ltd &nbsp;·&nbsp; Powered by Hermes Agent &nbsp;·&nbsp; Trust Built Grow &nbsp;·&nbsp; <span id="footer-time"></span>
+</footer>
+
+<script>
+// Clock
+function updateClock(){
+  const now=new Date();
+  const bst=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Dhaka'}));
+  const h=bst.getHours().toString().padStart(2,'0');
+  const m=bst.getMinutes().toString().padStart(2,'0');
+  const s=bst.getSeconds().toString().padStart(2,'0');
+  const ds=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const ms=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const str=`${ds[bst.getDay()]} ${bst.getDate()} ${ms[bst.getMonth()]} · ${h}:${m}:${s} BST`;
+  const el=document.getElementById('clock');
+  const fe=document.getElementById('footer-time');
+  if(el)el.textContent=str;
+  if(fe)fe.textContent='Last refreshed: '+str;
+}
+updateClock();setInterval(updateClock,1000);
+
+// Date display
+const now=new Date();
+const ms2=['January','February','March','April','May','June','July','August','September','October','November','December'];
+document.getElementById('today-date').textContent=ms2[now.getMonth()]+' '+now.getDate()+', '+now.getFullYear();
+
+// Tasks
+let tasks=JSON.parse(localStorage.getItem('ob-tasks'))||[
+  {text:'Send NAAAS project kickoff brief',done:false,due:'Today',priority:'critical'},
+  {text:'Follow up on company registration docs',done:false,due:'This week',priority:'high'},
+  {text:'Review Tahsin website bug fix',done:false,due:'ASAP',priority:'high'},
+  {text:'Draft 2 cold outreach emails',done:false,due:'This week',priority:'medium'},
+  {text:'Update revenue log',done:false,due:'Today',priority:'medium'},
+];
+
+function saveTasks(){localStorage.setItem('ob-tasks',JSON.stringify(tasks));}
+
+function renderTasks(){
+  const list=document.getElementById('task-list');
+  const priorityColors={critical:'badge-critical',high:'badge-high',medium:'badge-blue'};
+  list.innerHTML=tasks.map((t,i)=>`
+    <div class="task-item">
+      <div class="task-check ${t.done?'done':''}" onclick="toggleTask(${i})"></div>
+      <div class="task-body">
+        <div class="task-title ${t.done?'done':''}">${t.text}</div>
+        <div class="task-due ${t.due==='ASAP'||t.due==='Today'?'overdue':''}">${t.due}</div>
+      </div>
+      <span class="task-priority card-badge ${priorityColors[t.priority]||'badge-blue'}">${t.priority}</span>
+    </div>
+  `).join('');
+  const done=tasks.filter(t=>t.done).length;
+  document.getElementById('done-count').textContent=done+' done';
+  document.getElementById('tasks-total').textContent=tasks.length;
+  document.getElementById('tasks-overdue').textContent=tasks.filter(t=>!t.done&&(t.due==='ASAP'||t.due==='Today')).length;
+  document.getElementById('tasks-sub').textContent=done+' completed · '+(tasks.length-done)+' remaining';
+}
+
+function toggleTask(i){tasks[i].done=!tasks[i].done;saveTasks();renderTasks();}
+
+function addTask(){
+  const inp=document.getElementById('task-input');
+  const val=inp.value.trim();
+  if(!val)return;
+  tasks.unshift({text:val,done:false,due:'Today',priority:'medium'});
+  saveTasks();renderTasks();inp.value='';
+}
+
+document.getElementById('task-input').addEventListener('keydown',function(e){if(e.key==='Enter')addTask();});
+renderTasks();
+</script>
+</body>
+</html>

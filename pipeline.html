@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OceanBlu — Pipeline</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">
+    <span class="logo-text">ocean</span><span class="logo-box">Blu</span>
+    <span class="logo-tag">Revenue Pipeline</span>
+  </div>
+  <div class="header-right">
+    <div class="pill"><span class="dot"></span> Hermes Running</div>
+    <span class="clock" id="clock"></span>
+    <button class="btn" onclick="location.reload()">↺ Refresh</button>
+  </div>
+</header>
+<nav>
+  <a href="index.html">Dashboard</a>
+  <a href="projects.html">Projects</a>
+  <a href="tasks.html">Tasks</a>
+  <a href="team.html">Team</a>
+  <a href="pipeline.html" class="active">Pipeline</a>
+  <a href="reports.html">Reports</a>
+  <a href="settings.html">Settings</a>
+</nav>
+<main>
+
+<div class="slabel">Revenue Snapshot</div>
+<div class="metrics" style="margin-bottom:20px;">
+  <div class="metric"><div class="metric-label">Current MRR</div><div class="metric-value v-amber" id="curr-mrr">$0</div><div class="metric-sub">Early revenue stage</div></div>
+  <div class="metric"><div class="metric-label">MRR Target</div><div class="metric-value v-green">$10,000</div><div class="metric-sub">End of 2026</div></div>
+  <div class="metric"><div class="metric-label">Progress</div><div class="metric-value v-amber">0%</div><div class="metric-sub">Toward target</div></div>
+  <div class="metric"><div class="metric-label">Anchor Client</div><div class="metric-value" style="font-size:14px;color:#fff;margin-top:4px;">NAAAS</div><div class="metric-sub">Contract July 2026</div></div>
+  <div class="metric"><div class="metric-label">Products</div><div class="metric-value v-blue">2</div><div class="metric-sub">SaaS in pipeline</div></div>
+  <div class="metric"><div class="metric-label">Outreach</div><div class="metric-value v-blue" id="outreach-count">0</div><div class="metric-sub">Emails this week</div></div>
+</div>
+
+<!-- MRR PROGRESS -->
+<div class="card" style="margin-bottom:16px;">
+  <div class="card-header">
+    <span class="card-title">MRR Tracker — $0 → $10,000</span>
+    <span class="badge b-amber">0% Complete</span>
+  </div>
+  <div style="margin-bottom:8px;">
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-bottom:8px;">
+      <span>$0 today</span>
+      <span style="color:var(--green);">$10,000 target</span>
+    </div>
+    <div style="height:8px;background:var(--navy-500);border-radius:4px;overflow:hidden;">
+      <div id="mrr-bar" style="height:100%;width:0%;background:var(--blue);border-radius:4px;transition:width .6s;"></div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px;">
+    <div style="background:var(--navy-600);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;">
+      <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;">Q1 2026</div>
+      <div style="font-size:14px;font-weight:500;color:var(--text-muted);">Pre-revenue</div>
+    </div>
+    <div style="background:var(--navy-600);border:1px solid #1a6fff33;border-radius:8px;padding:12px;text-align:center;">
+      <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;">Q2 2026</div>
+      <div style="font-size:14px;font-weight:500;color:var(--amber);">NAAAS contract</div>
+    </div>
+    <div style="background:var(--navy-600);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;">
+      <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;">Q3 2026</div>
+      <div style="font-size:14px;font-weight:500;color:var(--blue-light);">SaaS launch</div>
+    </div>
+    <div style="background:var(--navy-600);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;">
+      <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;">Q4 2026</div>
+      <div style="font-size:14px;font-weight:500;color:var(--green);">$10K MRR</div>
+    </div>
+  </div>
+</div>
+
+<div class="grid-2">
+
+  <!-- CLIENTS -->
+  <div>
+    <div class="slabel">Client Pipeline</div>
+
+    <!-- NAAAS -->
+    <div class="card" style="border-color:#ff4d4d33;margin-bottom:12px;">
+      <div class="card-header">
+        <div>
+          <div style="font-size:14px;font-weight:600;color:#fff;">NAAAS Holdings</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Anchor Enterprise Client</div>
+        </div>
+        <span class="badge b-red">CRITICAL</span>
+      </div>
+      <table class="table" style="margin-bottom:12px;">
+        <tr><td style="color:var(--text-muted);width:130px;">Type</td><td>Enterprise Service Client</td></tr>
+        <tr><td style="color:var(--text-muted);">Contract Start</td><td style="color:var(--amber);">July 2026</td></tr>
+        <tr><td style="color:var(--text-muted);">Scope</td><td>Full digital ecosystem · 8 wings</td></tr>
+        <tr><td style="color:var(--text-muted);">Stage</td><td style="color:var(--blue-light);">Pre-build / Planning</td></tr>
+        <tr><td style="color:var(--text-muted);">Revenue Type</td><td>Project fee + retainer</td></tr>
+      </table>
+      <div class="alert a-blue" style="font-size:11px;">Primary revenue engine for H2 2026. Deliver on time.</div>
+    </div>
+
+    <!-- BLUELIFE -->
+    <div class="card" style="margin-bottom:12px;">
+      <div class="card-header">
+        <div>
+          <div style="font-size:14px;font-weight:600;color:#fff;">BluLife Bashundhara</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Community OS Platform</div>
+        </div>
+        <span class="badge b-muted">OUTREACH</span>
+      </div>
+      <table class="table">
+        <tr><td style="color:var(--text-muted);width:130px;">Type</td><td>Community Platform Client</td></tr>
+        <tr><td style="color:var(--text-muted);">Stage</td><td style="color:var(--text-secondary);">Outreach in progress</td></tr>
+        <tr><td style="color:var(--text-muted);">Timeline</td><td>Ongoing</td></tr>
+      </table>
+    </div>
+
+    <!-- ADD NEW CLIENT -->
+    <div class="card" style="border-style:dashed;">
+      <div class="card-header">
+        <span class="card-title">Add New Client / Lead</span>
+      </div>
+      <div class="form-row" style="flex-direction:column;gap:8px;">
+        <input type="text" id="cl-name" placeholder="Client / company name">
+        <input type="text" id="cl-type" placeholder="Type (e.g. Enterprise, SaaS Lead, Agency)">
+        <input type="text" id="cl-stage" placeholder="Stage (e.g. Outreach, Proposal, Contract)">
+        <input type="text" id="cl-value" placeholder="Estimated value or MRR contribution">
+        <button class="btn btn-primary" onclick="addClient()">Add to Pipeline</button>
+      </div>
+      <div id="new-clients" style="margin-top:12px;"></div>
+    </div>
+  </div>
+
+  <!-- SAAS + OUTREACH -->
+  <div>
+    <div class="slabel">SaaS Products Pipeline</div>
+
+    <div class="card" style="border-color:#1a6fff33;margin-bottom:12px;">
+      <div class="card-header">
+        <div>
+          <div style="font-size:14px;font-weight:600;color:#fff;">AI Review Management SaaS</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Product 1 · MRR Engine</div>
+        </div>
+        <span class="badge b-blue">SPEC</span>
+      </div>
+      <table class="table" style="margin-bottom:10px;">
+        <tr><td style="color:var(--text-muted);width:130px;">Target Market</td><td>Agencies, SMEs</td></tr>
+        <tr><td style="color:var(--text-muted);">Launch Target</td><td>Q3 2026</td></tr>
+        <tr><td style="color:var(--text-muted);">Stage</td><td style="color:var(--blue-light);">Spec phase</td></tr>
+        <tr><td style="color:var(--text-muted);">MRR Target</td><td style="color:var(--green);">$3,000–$5,000</td></tr>
+      </table>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Build Progress</span><span>5%</span></div>
+        <div class="prog-bar"><div class="prog-fill pf-blue" style="width:5%;"></div></div>
+      </div>
+    </div>
+
+    <div class="card" style="border-color:#1a6fff33;margin-bottom:16px;">
+      <div class="card-header">
+        <div>
+          <div style="font-size:14px;font-weight:600;color:#fff;">Content Approval Tool SaaS</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Product 2 · MRR Engine</div>
+        </div>
+        <span class="badge b-blue">SPEC</span>
+      </div>
+      <table class="table" style="margin-bottom:10px;">
+        <tr><td style="color:var(--text-muted);width:130px;">Target Market</td><td>Digital agencies</td></tr>
+        <tr><td style="color:var(--text-muted);">Launch Target</td><td>Q3 2026</td></tr>
+        <tr><td style="color:var(--text-muted);">Stage</td><td style="color:var(--blue-light);">Spec phase</td></tr>
+        <tr><td style="color:var(--text-muted);">MRR Target</td><td style="color:var(--green);">$3,000–$5,000</td></tr>
+      </table>
+      <div class="prog-wrap">
+        <div class="prog-label"><span>Build Progress</span><span>5%</span></div>
+        <div class="prog-bar"><div class="prog-fill pf-blue" style="width:5%;"></div></div>
+      </div>
+    </div>
+
+    <!-- OUTREACH LOG -->
+    <div class="slabel">Weekly Outreach Log</div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Cold Outreach Tracker</span>
+        <span class="badge b-muted">Min. 2/week</span>
+      </div>
+      <div id="outreach-list"></div>
+      <div class="form-row" style="flex-direction:column;gap:8px;margin-top:12px;">
+        <input type="text" id="out-to" placeholder="Sent to (company / person)">
+        <input type="text" id="out-type" placeholder="Type (Cold email, LinkedIn, Referral)">
+        <input type="text" id="out-status" placeholder="Status (Sent, Replied, Meeting booked)">
+        <button class="btn btn-primary" onclick="addOutreach()">Log Outreach</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</main>
+<footer>OceanBlu Digital Ltd · Trust Built Grow · Hermes CEO Hub</footer>
+<script>
+function updateClock(){const now=new Date();const b=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Dhaka'}));const p=n=>n.toString().padStart(2,'0');document.getElementById('clock').textContent=`${p(b.getHours())}:${p(b.getMinutes())}:${p(b.getSeconds())} BST`;}
+updateClock();setInterval(updateClock,1000);
+
+let outreach=JSON.parse(localStorage.getItem('ob-outreach'))||[];
+function renderOutreach(){
+  const list=document.getElementById('outreach-list');
+  const statusColor={Sent:'var(--text-secondary)',Replied:'var(--amber)','Meeting booked':'var(--green)'};
+  list.innerHTML=outreach.length?`<table class="table"><thead><tr><th>Date</th><th>To</th><th>Type</th><th>Status</th></tr></thead><tbody>${outreach.map(o=>`<tr><td style="color:var(--text-muted);">${o.date}</td><td>${o.to}</td><td style="color:var(--text-secondary);">${o.type}</td><td style="color:${statusColor[o.status]||'var(--text-secondary)'};">${o.status}</td></tr>`).join('')}</tbody></table>`:`<div style="font-size:12px;color:var(--text-muted);padding:10px 0;">No outreach logged yet. Target: 2 per week.</div>`;
+  document.getElementById('outreach-count').textContent=outreach.filter(o=>{const d=new Date(o.rawDate);const now=new Date();const weekAgo=new Date(now-7*86400000);return d>=weekAgo;}).length;
+}
+function addOutreach(){
+  const to=document.getElementById('out-to').value.trim();
+  const type=document.getElementById('out-type').value.trim();
+  const status=document.getElementById('out-status').value.trim();
+  if(!to)return;
+  outreach.unshift({date:new Date().toLocaleDateString('en-GB'),rawDate:new Date().toISOString(),to,type:type||'Email',status:status||'Sent'});
+  localStorage.setItem('ob-outreach',JSON.stringify(outreach));
+  renderOutreach();
+  ['out-to','out-type','out-status'].forEach(id=>document.getElementById(id).value='');
+}
+
+let clients=JSON.parse(localStorage.getItem('ob-extra-clients'))||[];
+function renderClients(){document.getElementById('new-clients').innerHTML=clients.map(c=>`<div style="background:var(--navy-600);border-radius:8px;padding:10px;margin-bottom:8px;font-size:12px;"><div style="font-weight:500;color:#fff;">${c.name}</div><div style="color:var(--text-muted);margin-top:2px;">${c.type} · ${c.stage} · ${c.value}</div></div>`).join('');}
+function addClient(){
+  const name=document.getElementById('cl-name').value.trim();
+  if(!name)return;
+  clients.unshift({name,type:document.getElementById('cl-type').value||'Lead',stage:document.getElementById('cl-stage').value||'Outreach',value:document.getElementById('cl-value').value||'TBD'});
+  localStorage.setItem('ob-extra-clients',JSON.stringify(clients));
+  renderClients();
+  ['cl-name','cl-type','cl-stage','cl-value'].forEach(id=>document.getElementById(id).value='');
+}
+
+renderOutreach();
+renderClients();
+</script>
+</body>
+</html>

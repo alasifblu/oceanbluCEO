@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OceanBlu — Projects</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">
+    <span class="logo-text">ocean</span><span class="logo-box">Blu</span>
+    <span class="logo-tag">Project War Room</span>
+  </div>
+  <div class="header-right">
+    <div class="pill"><span class="dot"></span> Hermes Running</div>
+    <span class="clock" id="clock"></span>
+    <button class="btn" onclick="location.reload()">↺ Refresh</button>
+  </div>
+</header>
+<nav>
+  <a href="index.html">Dashboard</a>
+  <a href="projects.html" class="active">Projects</a>
+  <a href="tasks.html">Tasks</a>
+  <a href="team.html">Team</a>
+  <a href="pipeline.html">Pipeline</a>
+  <a href="reports.html">Reports</a>
+  <a href="settings.html">Settings</a>
+</nav>
+<main>
+
+<div class="slabel">Project Overview</div>
+<div class="metrics">
+  <div class="metric"><div class="metric-label">Total Projects</div><div class="metric-value v-blue">6</div><div class="metric-sub">Active</div></div>
+  <div class="metric"><div class="metric-label">Critical</div><div class="metric-value v-red">1</div><div class="metric-sub">NAAAS Ecosystem</div></div>
+  <div class="metric"><div class="metric-label">High Priority</div><div class="metric-value v-amber">3</div><div class="metric-sub">This quarter</div></div>
+  <div class="metric"><div class="metric-label">On Track</div><div class="metric-value v-green">4</div><div class="metric-sub">Progressing</div></div>
+  <div class="metric"><div class="metric-label">At Risk</div><div class="metric-value v-red">2</div><div class="metric-sub">Needs attention</div></div>
+  <div class="metric"><div class="metric-label">Next Deadline</div><div class="metric-value" style="font-size:16px;color:#fff;">June 2026</div><div class="metric-sub">Legal Registration</div></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- NAAAS — FEATURED -->
+<div class="slabel">Critical — NAAAS Digital Ecosystem</div>
+<div class="card" style="border-color:#ff4d4d44;margin-bottom:16px;">
+  <div class="card-header">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="icon-box ib-red" style="width:40px;height:40px;font-size:18px;">🏢</div>
+      <div>
+        <div style="font-size:15px;font-weight:600;color:#fff;">NAAAS Digital Ecosystem</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Anchor Client · Full digital presence across 8 wings</div>
+      </div>
+    </div>
+    <span class="badge b-red">CRITICAL</span>
+  </div>
+  <div class="grid-2" style="margin-bottom:16px;">
+    <div>
+      <div style="font-size:10px;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;">Project Details</div>
+      <table class="table">
+        <tr><td style="color:var(--text-muted);width:120px;">Owner</td><td>Sikhon (CEO)</td></tr>
+        <tr><td style="color:var(--text-muted);">Client</td><td style="color:var(--blue-light);">NAAAS Holdings</td></tr>
+        <tr><td style="color:var(--text-muted);">Contract Start</td><td style="color:var(--amber);">July 2026</td></tr>
+        <tr><td style="color:var(--text-muted);">Stage</td><td>Pre-build / Planning</td></tr>
+        <tr><td style="color:var(--text-muted);">Priority</td><td style="color:var(--red);">CRITICAL</td></tr>
+      </table>
+    </div>
+    <div>
+      <div style="font-size:10px;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;">8 Wings Scope</div>
+      <div id="naaas-wings"></div>
+    </div>
+  </div>
+  <div>
+    <div class="prog-label"><span>Overall Progress</span><span id="naaas-pct">10%</span></div>
+    <div class="prog-bar" style="height:6px;"><div class="prog-fill pf-red" id="naaas-bar" style="width:10%;"></div></div>
+  </div>
+  <div class="form-row" style="margin-top:14px;">
+    <input type="text" id="naaas-note" placeholder="Add project note or milestone update...">
+    <button class="btn btn-primary" onclick="addNaaasNote()">Save Note</button>
+  </div>
+  <div id="naaas-notes" style="margin-top:10px;"></div>
+</div>
+
+<!-- OTHER PROJECTS -->
+<div class="slabel">All Projects</div>
+<div class="grid-2">
+
+  <div class="card" style="border-color:#f5c51833;">
+    <div class="card-header">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="icon-box ib-amber">⚖️</div>
+        <div>
+          <div style="font-size:13px;font-weight:500;color:#fff;">Legal Registration</div>
+          <div style="font-size:11px;color:var(--text-muted);">OceanBlu Digital Ltd · Company Formation</div>
+        </div>
+      </div>
+      <span class="badge b-amber">HIGH</span>
+    </div>
+    <table class="table" style="margin-bottom:12px;">
+      <tr><td style="color:var(--text-muted);width:100px;">Owner</td><td>Sikhon</td></tr>
+      <tr><td style="color:var(--text-muted);">Deadline</td><td style="color:var(--amber);">June 2026</td></tr>
+      <tr><td style="color:var(--text-muted);">Status</td><td style="color:var(--amber);">In Progress</td></tr>
+    </table>
+    <div class="prog-wrap">
+      <div class="prog-label"><span>Progress</span><span>40%</span></div>
+      <div class="prog-bar"><div class="prog-fill pf-amber" style="width:40%;"></div></div>
+    </div>
+    <div class="form-row" style="margin-top:12px;">
+      <input type="text" placeholder="Update status...">
+      <button class="btn btn-primary">Save</button>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:#1a6fff33;">
+    <div class="card-header">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="icon-box ib-blue">🤖</div>
+        <div>
+          <div style="font-size:13px;font-weight:500;color:#fff;">AI Review Management SaaS</div>
+          <div style="font-size:11px;color:var(--text-muted);">Product 1 · Revenue Engine</div>
+        </div>
+      </div>
+      <span class="badge b-blue">HIGH</span>
+    </div>
+    <table class="table" style="margin-bottom:12px;">
+      <tr><td style="color:var(--text-muted);width:100px;">Owner</td><td>Sikhon</td></tr>
+      <tr><td style="color:var(--text-muted);">Deadline</td><td>Q3 2026</td></tr>
+      <tr><td style="color:var(--text-muted);">Status</td><td style="color:var(--blue-light);">Spec Phase</td></tr>
+    </table>
+    <div class="prog-wrap">
+      <div class="prog-label"><span>Progress</span><span>5%</span></div>
+      <div class="prog-bar"><div class="prog-fill pf-blue" style="width:5%;"></div></div>
+    </div>
+    <div class="form-row" style="margin-top:12px;">
+      <input type="text" placeholder="Update status...">
+      <button class="btn btn-primary">Save</button>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:#1a6fff33;">
+    <div class="card-header">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="icon-box ib-blue">✅</div>
+        <div>
+          <div style="font-size:13px;font-weight:500;color:#fff;">Content Approval Tool SaaS</div>
+          <div style="font-size:11px;color:var(--text-muted);">Product 2 · Revenue Engine</div>
+        </div>
+      </div>
+      <span class="badge b-blue">HIGH</span>
+    </div>
+    <table class="table" style="margin-bottom:12px;">
+      <tr><td style="color:var(--text-muted);width:100px;">Owner</td><td>Sikhon</td></tr>
+      <tr><td style="color:var(--text-muted);">Deadline</td><td>Q3 2026</td></tr>
+      <tr><td style="color:var(--text-muted);">Status</td><td style="color:var(--blue-light);">Spec Phase</td></tr>
+    </table>
+    <div class="prog-wrap">
+      <div class="prog-label"><span>Progress</span><span>5%</span></div>
+      <div class="prog-bar"><div class="prog-fill pf-blue" style="width:5%;"></div></div>
+    </div>
+    <div class="form-row" style="margin-top:12px;">
+      <input type="text" placeholder="Update status...">
+      <button class="btn btn-primary">Save</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="icon-box ib-blue">🏘️</div>
+        <div>
+          <div style="font-size:13px;font-weight:500;color:#fff;">BluLife Community OS</div>
+          <div style="font-size:11px;color:var(--text-muted);">Bashundhara · Community Platform</div>
+        </div>
+      </div>
+      <span class="badge b-muted">MEDIUM</span>
+    </div>
+    <table class="table" style="margin-bottom:12px;">
+      <tr><td style="color:var(--text-muted);width:100px;">Owner</td><td>Sikhon</td></tr>
+      <tr><td style="color:var(--text-muted);">Deadline</td><td>Ongoing</td></tr>
+      <tr><td style="color:var(--text-muted);">Status</td><td style="color:var(--blue-light);">Outreach Phase</td></tr>
+    </table>
+    <div class="prog-wrap">
+      <div class="prog-label"><span>Progress</span><span>15%</span></div>
+      <div class="prog-bar"><div class="prog-fill pf-blue" style="width:15%;"></div></div>
+    </div>
+    <div class="form-row" style="margin-top:12px;">
+      <input type="text" placeholder="Update status...">
+      <button class="btn btn-primary">Save</button>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:#ff4d4d33;">
+    <div class="card-header">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="icon-box ib-red">🐛</div>
+        <div>
+          <div style="font-size:13px;font-weight:500;color:#fff;">OceanBlu Website Bug Fix</div>
+          <div style="font-size:11px;color:var(--text-muted);">Meta image / Twitter sharing issue</div>
+        </div>
+      </div>
+      <span class="badge b-red">ASAP</span>
+    </div>
+    <table class="table" style="margin-bottom:12px;">
+      <tr><td style="color:var(--text-muted);width:100px;">Owner</td><td style="color:var(--green);">Tahsin Hasan</td></tr>
+      <tr><td style="color:var(--text-muted);">Deadline</td><td style="color:var(--red);">ASAP</td></tr>
+      <tr><td style="color:var(--text-muted);">Status</td><td style="color:var(--red);">Pending — No update</td></tr>
+    </table>
+    <div class="prog-wrap">
+      <div class="prog-label"><span>Progress</span><span>0%</span></div>
+      <div class="prog-bar"><div class="prog-fill pf-red" style="width:0%;"></div></div>
+    </div>
+    <div class="alert a-red" style="margin-top:12px;margin-bottom:0;">⚠ No update from Tahsin in 24h. Follow up needed.</div>
+  </div>
+
+</div>
+
+</main>
+<footer>OceanBlu Digital Ltd · Trust Built Grow · Hermes CEO Hub</footer>
+<script>
+function updateClock(){const now=new Date();const b=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Dhaka'}));const p=n=>n.toString().padStart(2,'0');document.getElementById('clock').textContent=`${p(b.getHours())}:${p(b.getMinutes())}:${p(b.getSeconds())} BST`;}
+updateClock();setInterval(updateClock,1000);
+
+const wings=['Website & Landing Pages','Social Media Presence','Digital Marketing Setup','App / Platform Interface','Brand Identity System','Email Marketing Infrastructure','CRM & Lead Pipeline','Analytics & Reporting'];
+document.getElementById('naaas-wings').innerHTML=wings.map((w,i)=>`<div style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:12px;color:var(--text-secondary);"><span style="width:16px;height:16px;border-radius:3px;background:var(--navy-500);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--text-muted);">${i+1}</span>${w}</div>`).join('');
+
+let notes=JSON.parse(localStorage.getItem('naaas-notes'))||[];
+function renderNotes(){document.getElementById('naaas-notes').innerHTML=notes.map(n=>`<div style="background:var(--navy-600);border-radius:6px;padding:8px 12px;margin-bottom:6px;font-size:12px;color:var(--text-secondary);">${n.date} — ${n.text}</div>`).join('');}
+function addNaaasNote(){const v=document.getElementById('naaas-note').value.trim();if(!v)return;const d=new Date().toLocaleDateString('en-GB');notes.unshift({date:d,text:v});localStorage.setItem('naaas-notes',JSON.stringify(notes));renderNotes();document.getElementById('naaas-note').value='';}
+renderNotes();
+
+let prog=parseInt(localStorage.getItem('naaas-prog'))||10;
+document.getElementById('naaas-pct').textContent=prog+'%';
+document.getElementById('naaas-bar').style.width=prog+'%';
+</script>
+</body>
+</html>

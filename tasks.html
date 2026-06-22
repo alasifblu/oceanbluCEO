@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OceanBlu — Tasks</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.kanban-board{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.kanban-col{background:var(--navy-700);border:1px solid var(--border);border-radius:10px;padding:14px;min-height:400px;}
+.col-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.col-title{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;}
+.col-todo .col-title{color:var(--text-secondary);}
+.col-doing .col-title{color:var(--amber);}
+.col-review .col-title{color:var(--blue-light);}
+.col-done .col-title{color:var(--green);}
+.col-count{font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;}
+.col-todo .col-count{background:var(--navy-500);color:var(--text-secondary);}
+.col-doing .col-count{background:#f5c51822;color:var(--amber);}
+.col-review .col-count{background:var(--blue-dim);color:var(--blue-light);}
+.col-done .col-count{background:#39d98a22;color:var(--green);}
+.k-card{background:var(--navy-600);border:1px solid var(--border);border-radius:8px;padding:11px;margin-bottom:8px;transition:border-color .2s;cursor:default;}
+.k-card:hover{border-color:var(--blue);}
+.k-card-title{font-size:12px;font-weight:500;color:#fff;margin-bottom:6px;line-height:1.4;}
+.k-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
+.k-card-meta{font-size:10px;color:var(--text-muted);}
+.k-card-actions{display:flex;gap:4px;}
+.k-btn{background:var(--navy-500);border:1px solid var(--border);color:var(--text-muted);padding:3px 8px;border-radius:4px;cursor:pointer;font-size:10px;transition:all .2s;}
+.k-btn:hover{border-color:var(--blue);color:var(--blue);}
+.k-btn.done-btn:hover{border-color:var(--green);color:var(--green);}
+.k-btn.del-btn:hover{border-color:var(--red);color:var(--red);}
+.add-card-area{margin-top:8px;}
+.add-card-area input{width:100%;background:var(--navy-600);border:1px solid var(--border);border-radius:6px;padding:8px 10px;color:#fff;font-size:12px;outline:none;margin-bottom:6px;font-family:'Inter',sans-serif;}
+.add-card-area input:focus{border-color:var(--blue);}
+.add-card-area input::placeholder{color:var(--text-muted);}
+.add-card-btn{width:100%;background:transparent;border:1px dashed var(--border);border-radius:6px;padding:8px;color:var(--text-muted);font-size:11px;cursor:pointer;transition:all .2s;}
+.add-card-btn:hover{border-color:var(--blue);color:var(--blue);}
+.filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.filter-btn{background:var(--navy-600);border:1px solid var(--border);color:var(--text-muted);padding:5px 12px;border-radius:20px;cursor:pointer;font-size:11px;transition:all .2s;}
+.filter-btn.active,.filter-btn:hover{border-color:var(--blue);color:var(--blue);}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <span class="logo-text">ocean</span><span class="logo-box">Blu</span>
+    <span class="logo-tag">Task Operations</span>
+  </div>
+  <div class="header-right">
+    <div class="pill"><span class="dot"></span> Hermes Running</div>
+    <span class="clock" id="clock"></span>
+    <button class="btn" onclick="location.reload()">↺ Refresh</button>
+  </div>
+</header>
+<nav>
+  <a href="index.html">Dashboard</a>
+  <a href="projects.html">Projects</a>
+  <a href="tasks.html" class="active">Tasks</a>
+  <a href="team.html">Team</a>
+  <a href="pipeline.html">Pipeline</a>
+  <a href="reports.html">Reports</a>
+  <a href="settings.html">Settings</a>
+</nav>
+<main>
+
+<div class="slabel">Task Metrics</div>
+<div class="metrics" style="margin-bottom:20px;">
+  <div class="metric"><div class="metric-label">Total Tasks</div><div class="metric-value v-blue" id="m-total">0</div></div>
+  <div class="metric"><div class="metric-label">To Do</div><div class="metric-value" id="m-todo">0</div></div>
+  <div class="metric"><div class="metric-label">In Progress</div><div class="metric-value v-amber" id="m-doing">0</div></div>
+  <div class="metric"><div class="metric-label">In Review</div><div class="metric-value v-blue" id="m-review">0</div></div>
+  <div class="metric"><div class="metric-label">Completed</div><div class="metric-value v-green" id="m-done">0</div></div>
+  <div class="metric"><div class="metric-label">Overdue</div><div class="metric-value v-red" id="m-overdue">0</div></div>
+</div>
+
+<div class="filter-bar">
+  <span style="font-size:11px;color:var(--text-muted);line-height:28px;">Filter:</span>
+  <button class="filter-btn active" onclick="filterTasks('all',this)">All</button>
+  <button class="filter-btn" onclick="filterTasks('sikhon',this)">Sikhon</button>
+  <button class="filter-btn" onclick="filterTasks('tahsin',this)">Tahsin</button>
+  <button class="filter-btn" onclick="filterTasks('critical',this)">Critical</button>
+  <button class="filter-btn" onclick="filterTasks('high',this)">High</button>
+  <button class="filter-btn" onclick="filterTasks('naaas',this)">NAAAS</button>
+</div>
+
+<div class="kanban-board">
+  <div class="kanban-col col-todo" id="col-todo">
+    <div class="col-header">
+      <span class="col-title">To Do</span>
+      <span class="col-count" id="cnt-todo">0</span>
+    </div>
+    <div id="cards-todo"></div>
+    <div class="add-card-area">
+      <input type="text" id="inp-todo" placeholder="New task..." onkeydown="if(event.key==='Enter')addCard('todo')">
+      <button class="add-card-btn" onclick="addCard('todo')">+ Add task</button>
+    </div>
+  </div>
+  <div class="kanban-col col-doing" id="col-doing">
+    <div class="col-header">
+      <span class="col-title">In Progress</span>
+      <span class="col-count" id="cnt-doing">0</span>
+    </div>
+    <div id="cards-doing"></div>
+    <div class="add-card-area">
+      <input type="text" id="inp-doing" placeholder="New task..." onkeydown="if(event.key==='Enter')addCard('doing')">
+      <button class="add-card-btn" onclick="addCard('doing')">+ Add task</button>
+    </div>
+  </div>
+  <div class="kanban-col col-review" id="col-review">
+    <div class="col-header">
+      <span class="col-title">In Review</span>
+      <span class="col-count" id="cnt-review">0</span>
+    </div>
+    <div id="cards-review"></div>
+    <div class="add-card-area">
+      <input type="text" id="inp-review" placeholder="New task..." onkeydown="if(event.key==='Enter')addCard('review')">
+      <button class="add-card-btn" onclick="addCard('review')">+ Add task</button>
+    </div>
+  </div>
+  <div class="kanban-col col-done" id="col-done">
+    <div class="col-header">
+      <span class="col-title">Done</span>
+      <span class="col-count" id="cnt-done">0</span>
+    </div>
+    <div id="cards-done"></div>
+    <div class="add-card-area">
+      <input type="text" id="inp-done" placeholder="New task..." onkeydown="if(event.key==='Enter')addCard('done')">
+      <button class="add-card-btn" onclick="addCard('done')">+ Add task</button>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer>OceanBlu Digital Ltd · Trust Built Grow · Hermes CEO Hub</footer>
+<script>
+function updateClock(){const now=new Date();const b=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Dhaka'}));const p=n=>n.toString().padStart(2,'0');document.getElementById('clock').textContent=`${p(b.getHours())}:${p(b.getMinutes())}:${p(b.getSeconds())} BST`;}
+updateClock();setInterval(updateClock,1000);
+
+const priorityBadge={critical:'b-red',high:'b-amber',medium:'b-blue',low:'b-muted'};
+
+let tasks=JSON.parse(localStorage.getItem('ob-kanban'))||[
+  {id:1,title:'Send NAAAS project kickoff brief to client',col:'doing',assignee:'Sikhon',priority:'critical',project:'NAAAS',due:'Today'},
+  {id:2,title:'Complete OceanBlu company registration docs',col:'doing',assignee:'Sikhon',priority:'high',project:'Legal',due:'June 2026'},
+  {id:3,title:'Fix OceanBlu website meta/Twitter bug',col:'todo',assignee:'Tahsin',priority:'high',project:'Website',due:'ASAP'},
+  {id:4,title:'Draft AI Review SaaS product spec v1',col:'todo',assignee:'Sikhon',priority:'high',project:'SaaS',due:'Q3 2026'},
+  {id:5,title:'Draft Content Approval Tool spec v1',col:'todo',assignee:'Sikhon',priority:'high',project:'SaaS',due:'Q3 2026'},
+  {id:6,title:'Send 2 cold outreach emails this week',col:'todo',assignee:'Sikhon',priority:'medium',project:'BizDev',due:'This week'},
+  {id:7,title:'Update revenue and invoice log',col:'todo',assignee:'Sikhon',priority:'medium',project:'Finance',due:'Today'},
+  {id:8,title:'BluLife outreach — Bashundhara contacts',col:'todo',assignee:'Sikhon',priority:'medium',project:'BluLife',due:'Ongoing'},
+  {id:9,title:'NAAAS social media content calendar draft',col:'review',assignee:'Sikhon',priority:'critical',project:'NAAAS',due:'July 2026'},
+];
+
+let activeFilter='all';
+
+function saveT(){localStorage.setItem('ob-kanban',JSON.stringify(tasks));}
+
+function renderAll(){
+  const cols=['todo','doing','review','done'];
+  cols.forEach(col=>{
+    const filtered=tasks.filter(t=>{
+      if(t.col!==col)return false;
+      if(activeFilter==='all')return true;
+      if(activeFilter==='sikhon')return t.assignee==='Sikhon';
+      if(activeFilter==='tahsin')return t.assignee==='Tahsin';
+      if(activeFilter==='critical')return t.priority==='critical';
+      if(activeFilter==='high')return t.priority==='high';
+      if(activeFilter==='naaas')return t.project==='NAAAS';
+      return true;
+    });
+    document.getElementById('cards-'+col).innerHTML=filtered.map(t=>`
+      <div class="k-card" id="card-${t.id}">
+        <div class="k-card-title">${t.title}</div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px;">
+          <span class="badge ${priorityBadge[t.priority]||'b-muted'}" style="font-size:9px;">${t.priority}</span>
+          <span class="badge b-muted" style="font-size:9px;">${t.project}</span>
+        </div>
+        <div class="k-card-footer">
+          <div class="k-card-meta">${t.assignee} · ${t.due}</div>
+          <div class="k-card-actions">
+            ${col!=='todo'?`<button class="k-btn" onclick="moveCard(${t.id},'left')">←</button>`:''}
+            ${col!=='done'?`<button class="k-btn done-btn" onclick="moveCard(${t.id},'right')">→</button>`:''}
+            <button class="k-btn del-btn" onclick="delCard(${t.id})">✕</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+    document.getElementById('cnt-'+col).textContent=filtered.length;
+  });
+  document.getElementById('m-total').textContent=tasks.length;
+  document.getElementById('m-todo').textContent=tasks.filter(t=>t.col==='todo').length;
+  document.getElementById('m-doing').textContent=tasks.filter(t=>t.col==='doing').length;
+  document.getElementById('m-review').textContent=tasks.filter(t=>t.col==='review').length;
+  document.getElementById('m-done').textContent=tasks.filter(t=>t.col==='done').length;
+  document.getElementById('m-overdue').textContent=tasks.filter(t=>t.col!=='done'&&(t.due==='ASAP'||t.due==='Today')).length;
+}
+
+const colOrder=['todo','doing','review','done'];
+function moveCard(id,dir){
+  const t=tasks.find(x=>x.id===id);
+  if(!t)return;
+  const i=colOrder.indexOf(t.col);
+  if(dir==='left'&&i>0)t.col=colOrder[i-1];
+  if(dir==='right'&&i<3)t.col=colOrder[i+1];
+  saveT();renderAll();
+}
+function delCard(id){tasks=tasks.filter(t=>t.id!==id);saveT();renderAll();}
+function addCard(col){
+  const inp=document.getElementById('inp-'+col);
+  const v=inp.value.trim();
+  if(!v)return;
+  tasks.push({id:Date.now(),title:v,col,assignee:'Sikhon',priority:'medium',project:'General',due:'TBD'});
+  saveT();renderAll();inp.value='';
+}
+function filterTasks(f,btn){
+  activeFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAll();
+}
+renderAll();
+</script>
+</body>
+</html>

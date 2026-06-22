@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OceanBlu — Settings</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">
+    <span class="logo-text">ocean</span><span class="logo-box">Blu</span>
+    <span class="logo-tag">Hub Settings</span>
+  </div>
+  <div class="header-right">
+    <div class="pill"><span class="dot"></span> Hermes Running</div>
+    <span class="clock" id="clock"></span>
+    <button class="btn" onclick="location.reload()">↺ Refresh</button>
+  </div>
+</header>
+<nav>
+  <a href="index.html">Dashboard</a>
+  <a href="projects.html">Projects</a>
+  <a href="tasks.html">Tasks</a>
+  <a href="team.html">Team</a>
+  <a href="pipeline.html">Pipeline</a>
+  <a href="reports.html">Reports</a>
+  <a href="settings.html" class="active">Settings</a>
+</nav>
+<main>
+
+<div class="alert a-amber" style="margin-bottom:20px;">⚠ This page is CEO-only. Do not share access to this URL with employees.</div>
+
+<div class="grid-2">
+
+  <!-- HERMES CONNECTION -->
+  <div>
+    <div class="slabel">Hermes System</div>
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header"><span class="card-title">Connection Status</span><span class="badge b-green">Live</span></div>
+      <table class="table">
+        <tr><td style="color:var(--text-muted);width:160px;">Railway URL</td><td style="color:var(--blue-light);font-size:11px;">hermes-agent-production-3245.up.railway.app</td></tr>
+        <tr><td style="color:var(--text-muted);">Gateway Status</td><td style="color:var(--green);">Running</td></tr>
+        <tr><td style="color:var(--text-muted);">Active Model</td><td>nvidia/nemotron-3-super-128b-a12b:free</td></tr>
+        <tr><td style="color:var(--text-muted);">LLM Provider</td><td>OpenRouter</td></tr>
+        <tr><td style="color:var(--text-muted);">Discord Channel</td><td>OceanBlu · #general</td></tr>
+        <tr><td style="color:var(--text-muted);">Home Channel ID</td><td style="font-size:11px;">1517798399410311170</td></tr>
+        <tr><td style="color:var(--text-muted);">Version</td><td>Hermes Agent v0.16.0</td></tr>
+      </table>
+    </div>
+
+    <!-- AI ROUTING -->
+    <div class="slabel">AI Model Routing</div>
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header"><span class="card-title">Multi-Model Config</span><span class="badge b-blue">Active</span></div>
+      <div class="row">
+        <div class="icon-box ib-blue">✍️</div>
+        <div class="row-info">
+          <div class="row-title">Writing & Reports</div>
+          <div class="row-sub">Client proposals, NAAAS content, SaaS specs</div>
+        </div>
+        <span class="badge b-blue">Claude Sonnet</span>
+      </div>
+      <div class="row">
+        <div class="icon-box ib-green">⚡</div>
+        <div class="row-info">
+          <div class="row-title">Task Parsing & Reminders</div>
+          <div class="row-sub">Standup summaries, quick replies, routing</div>
+        </div>
+        <span class="badge b-green">Gemini Flash Free</span>
+      </div>
+      <div class="row">
+        <div class="icon-box ib-amber">🔧</div>
+        <div class="row-info">
+          <div class="row-title">Technical / Coding</div>
+          <div class="row-sub">SaaS build tasks, scripts, debugging</div>
+        </div>
+        <span class="badge b-amber">DeepSeek Coder</span>
+      </div>
+    </div>
+
+    <!-- CRON SCHEDULE -->
+    <div class="slabel">Cron Schedule</div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Automated Schedule</span><span class="badge b-green">All Active</span></div>
+      <table class="table">
+        <tr><td style="color:var(--text-muted);width:160px;">Daily CEO Report</td><td style="color:var(--green);">9:00 AM BST (UTC+6)</td></tr>
+        <tr><td style="color:var(--text-muted);">Weekly Summary</td><td style="color:var(--green);">Sunday 8:00 PM BST</td></tr>
+        <tr><td style="color:var(--text-muted);">24h Reminder</td><td>Auto before deadline</td></tr>
+        <tr><td style="color:var(--text-muted);">2h Reminder</td><td>Auto before deadline</td></tr>
+        <tr><td style="color:var(--text-muted);">CEO Alert</td><td style="color:var(--red);">4h+ overdue — instant</td></tr>
+        <tr><td style="color:var(--text-muted);">Financial Threshold</td><td style="color:var(--amber);">BDT 5,000 — CEO approval</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ACCESS + HANDOVER -->
+  <div>
+
+    <!-- TEAM ACCESS -->
+    <div class="slabel">Team Access (RBAC)</div>
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header"><span class="card-title">Discord Allowlist</span></div>
+      <div class="row">
+        <div class="avatar av-ceo">SI</div>
+        <div class="row-info">
+          <div class="row-title">Sikhon (CEO)</div>
+          <div class="row-sub" style="font-size:10px;">ID: 1269613652475121725</div>
+        </div>
+        <span class="badge b-blue">ADMIN</span>
+      </div>
+      <div class="row">
+        <div class="avatar av-emp">TH</div>
+        <div class="row-info">
+          <div class="row-title">Tahsin Hasan</div>
+          <div class="row-sub">Discord ID: Pending setup</div>
+        </div>
+        <span class="badge b-green">EMPLOYEE</span>
+      </div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
+        <div style="font-size:10px;letter-spacing:1px;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;">Add Team Member</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <input type="text" id="new-member-name" placeholder="Name" style="background:var(--navy-600);border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:#fff;font-size:12px;outline:none;font-family:'Inter',sans-serif;">
+          <input type="text" id="new-member-id" placeholder="Discord User ID" style="background:var(--navy-600);border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:#fff;font-size:12px;outline:none;font-family:'Inter',sans-serif;">
+          <select id="new-member-tier" style="background:var(--navy-600);border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:#fff;font-size:12px;outline:none;font-family:'Inter',sans-serif;">
+            <option value="employee">Employee</option>
+            <option value="admin">Admin</option>
+          </select>
+          <button class="btn btn-primary" onclick="addMember()">Add Member</button>
+        </div>
+        <div id="extra-members" style="margin-top:10px;"></div>
+      </div>
+    </div>
+
+    <!-- SOUL.MD SUMMARY -->
+    <div class="slabel">SOUL.md Summary</div>
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-header"><span class="card-title">Agent Identity Config</span><span class="badge b-green">Injected</span></div>
+      <table class="table">
+        <tr><td style="color:var(--text-muted);width:140px;">Agent Name</td><td>Hermes</td></tr>
+        <tr><td style="color:var(--text-muted);">CEO</td><td>Sikhon · OceanBlu Digital Ltd</td></tr>
+        <tr><td style="color:var(--text-muted);">Mission</td><td>$10K MRR · NAAAS delivery · Team ops</td></tr>
+        <tr><td style="color:var(--text-muted);">File Path</td><td style="font-size:11px;color:var(--blue-light);">/data/.hermes/SOUL.md</td></tr>
+        <tr><td style="color:var(--text-muted);">Last Updated</td><td>June 2026</td></tr>
+      </table>
+    </div>
+
+    <!-- HANDOVER CHECKLIST -->
+    <div class="slabel">Handover Checklist — CEO Only</div>
+    <div class="card" style="border-color:#f5c51833;">
+      <div class="card-header">
+        <span class="card-title">Client Transfer Checklist</span>
+        <span class="badge b-amber">🔒 Locked</span>
+      </div>
+      <div class="alert a-amber" style="margin-bottom:14px;font-size:11px;">Do not action until explicitly instructed. All items below remain with current admin until transfer is confirmed.</div>
+      <div id="handover-list"></div>
+    </div>
+
+  </div>
+</div>
+</main>
+<footer>OceanBlu Digital Ltd · Trust Built Grow · Hermes CEO Hub</footer>
+<script>
+function updateClock(){const now=new Date();const b=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Dhaka'}));const p=n=>n.toString().padStart(2,'0');document.getElementById('clock').textContent=`${p(b.getHours())}:${p(b.getMinutes())}:${p(b.getSeconds())} BST`;}
+updateClock();setInterval(updateClock,1000);
+
+const handoverItems=[
+  {item:'Discord server ownership transfer',detail:'Transfer OceanBlu server admin to end client account'},
+  {item:'Railway project access',detail:'Add end client as owner of Railway project'},
+  {item:'OpenRouter API key',detail:'Share or regenerate API key for client account'},
+  {item:'Hermes admin credentials',detail:'ADMIN_USERNAME + ADMIN_PASSWORD handoff'},
+  {item:'ALLOWED_USER_IDS update',detail:'Replace Sikhon Discord ID with client Discord ID'},
+  {item:'SOUL.md ownership update',detail:'Update CEO name and Discord ID in SOUL.md'},
+  {item:'GitHub Pages repo access',detail:'Transfer or fork dashboard repo to client account'},
+  {item:'Documentation handoff',detail:'Deliver full setup guide and this dashboard'},
+];
+document.getElementById('handover-list').innerHTML=handoverItems.map((h,i)=>`
+  <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);">
+    <div style="width:20px;height:20px;border:1.5px solid var(--text-muted);border-radius:4px;flex-shrink:0;margin-top:1px;"></div>
+    <div>
+      <div style="font-size:12px;font-weight:500;color:#fff;">${h.item}</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">${h.detail}</div>
+    </div>
+  </div>
+`).join('');
+
+let members=JSON.parse(localStorage.getItem('ob-members'))||[];
+function renderMembers(){document.getElementById('extra-members').innerHTML=members.map(m=>`<div style="display:flex;align-items:center;justify-content:space-between;background:var(--navy-600);border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:12px;"><div><div style="font-weight:500;color:#fff;">${m.name}</div><div style="color:var(--text-muted);font-size:10px;">${m.id}</div></div><span class="badge ${m.tier==='admin'?'b-blue':'b-green'}">${m.tier}</span></div>`).join('');}
+function addMember(){const name=document.getElementById('new-member-name').value.trim();const id=document.getElementById('new-member-id').value.trim();if(!name||!id)return;members.push({name,id,tier:document.getElementById('new-member-tier').value});localStorage.setItem('ob-members',JSON.stringify(members));renderMembers();['new-member-name','new-member-id'].forEach(i=>document.getElementById(i).value='');}
+renderMembers();
+</script>
+</body>
+</html>
