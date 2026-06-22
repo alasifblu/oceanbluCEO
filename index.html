@@ -9,8 +9,6 @@
 <style>
 .login-overlay{position:fixed;inset:0;background:#050d1e;display:flex;align-items:center;justify-content:center;z-index:999;}
 .login-box{background:#0d1526;border:1px solid #1e3a6e55;border-radius:16px;padding:40px;width:360px;text-align:center;}
-.login-logo{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:24px;}
-.login-title{font-size:14px;color:#7a9cc4;margin-bottom:24px;}
 .login-input{width:100%;background:#111d35;border:1px solid #1e3a6e55;border-radius:8px;padding:12px 16px;color:#fff;font-size:14px;outline:none;font-family:'Inter',sans-serif;margin-bottom:12px;transition:border-color .2s;box-sizing:border-box;}
 .login-input:focus{border-color:#1a6fff;}
 .login-input::placeholder{color:#3d5a7a;}
@@ -22,14 +20,13 @@
 </head>
 <body>
 
-<!-- LOGIN OVERLAY -->
 <div class="login-overlay" id="login-overlay">
   <div class="login-box">
-    <div class="login-logo">
+    <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:24px;">
       <span style="font-family:'Bebas Neue',cursive;font-size:28px;letter-spacing:2px;">ocean</span>
       <span style="background:#1a6fff;color:#fff;font-family:'Bebas Neue',cursive;font-size:28px;padding:0 7px;letter-spacing:2px;">Blu</span>
     </div>
-    <div class="login-title">CEO Operations Hub — Secure Login</div>
+    <div style="font-size:14px;color:#7a9cc4;margin-bottom:24px;">CEO Operations Hub — Secure Login</div>
     <input class="login-input" type="password" id="login-pass" placeholder="Enter Hermes password..." onkeydown="if(event.key==='Enter')doLogin()">
     <button class="login-btn" onclick="doLogin()">Access Dashboard</button>
     <div class="login-error" id="login-error">Incorrect password. Try again.</div>
@@ -43,8 +40,8 @@
     <span class="logo-tag">CEO Operations Hub</span>
   </div>
   <div class="header-right">
-    <div class="pill" id="hermes-pill"><span class="dot" id="hermes-dot"></span> <span id="hermes-status-text">Connecting...</span></div>
-    <div class="pill" id="discord-pill"><span class="dot" id="discord-dot"></span> <span id="discord-status-text">Discord</span></div>
+    <div class="pill"><span class="dot" id="hermes-dot" style="background:#f5c518;"></span><span id="hermes-status-text">Connecting...</span></div>
+    <div class="pill"><span class="dot" id="discord-dot" style="background:#3d5a7a;"></span><span id="discord-text">Discord</span></div>
     <span class="clock" id="clock"></span>
     <button class="btn" onclick="refreshData()">↺ Refresh</button>
     <button class="btn" onclick="doLogout()" style="color:#ff4d4d;">Sign Out</button>
@@ -63,20 +60,18 @@
 
 <main>
 
-  <!-- ALERTS -->
   <div class="slabel">Active Alerts</div>
   <div id="alerts-wrap">
-    <div class="alert a-red"><span>⚠</span><span><strong>OceanBlu Website Bug Fix</strong> — assigned to Tahsin, marked ASAP. No update in 24h.</span></div>
+    <div class="alert a-red"><span>⚠</span><span><strong>OceanBlu Website Bug Fix</strong> — assigned to Tahsin, ASAP. No update in 24h.</span></div>
     <div class="alert a-amber"><span>◉</span><span><strong>Legal Registration</strong> — deadline June 2026. Confirm status.</span></div>
-    <div class="alert a-blue"><span>◈</span><span><strong>NAAAS Digital Ecosystem</strong> — contract starts July 2026. Pre-build phase active.</span></div>
+    <div class="alert a-blue"><span>◈</span><span><strong>NAAAS Digital Ecosystem</strong> — contract starts July 2026. Pre-build active.</span></div>
   </div>
 
-  <!-- LIVE SYSTEM STATUS -->
-  <div class="slabel" style="margin-top:20px;">Live System Status — <span id="last-updated" style="color:var(--text-muted);font-size:10px;">fetching...</span></div>
+  <div class="slabel" style="margin-top:20px;">Live System — <span id="last-updated" style="color:var(--text-muted);font-size:10px;">fetching...</span></div>
   <div class="metrics">
     <div class="metric">
       <div class="metric-label">Gateway</div>
-      <div class="metric-value" id="m-gateway" style="font-size:16px;margin-top:4px;">...</div>
+      <div class="metric-value" id="m-gateway" style="font-size:16px;margin-top:4px;color:#f5c518;">...</div>
       <div class="metric-sub" id="m-gateway-sub">Loading</div>
     </div>
     <div class="metric">
@@ -86,18 +81,18 @@
     </div>
     <div class="metric">
       <div class="metric-label">Hermes Version</div>
-      <div class="metric-value" id="m-version" style="font-size:16px;margin-top:4px;">...</div>
-      <div class="metric-sub">Current build</div>
+      <div class="metric-value" id="m-version" style="font-size:16px;margin-top:4px;color:#fff;">...</div>
+      <div class="metric-sub" id="m-release">Current build</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Discord</div>
+      <div class="metric-value" id="m-discord" style="font-size:16px;margin-top:4px;color:#f5c518;">...</div>
+      <div class="metric-sub">Gateway channel</div>
     </div>
     <div class="metric">
       <div class="metric-label">Tasks Today</div>
       <div class="metric-value v-blue" id="tasks-total">0</div>
       <div class="metric-sub" id="tasks-sub">0 completed</div>
-    </div>
-    <div class="metric">
-      <div class="metric-label">Overdue</div>
-      <div class="metric-value v-red" id="tasks-overdue">0</div>
-      <div class="metric-sub">Needs attention</div>
     </div>
     <div class="metric">
       <div class="metric-label">MRR Target</div>
@@ -106,83 +101,31 @@
     </div>
   </div>
 
-  <!-- LIVE STATS ROW -->
   <div class="slabel" style="margin-top:20px;">System Health</div>
-  <div id="system-stats" class="metrics">
-    <div class="metric"><div class="metric-label">CPU</div><div class="metric-value v-blue" id="m-cpu">...</div></div>
-    <div class="metric"><div class="metric-label">Memory</div><div class="metric-value v-blue" id="m-mem">...</div></div>
-    <div class="metric"><div class="metric-label">Uptime</div><div class="metric-value v-green" id="m-uptime">...</div></div>
-    <div class="metric"><div class="metric-label">Model</div><div class="metric-value" id="m-model" style="font-size:11px;margin-top:6px;color:#fff;">...</div></div>
+  <div class="metrics">
+    <div class="metric"><div class="metric-label">Cron Jobs</div><div class="metric-value v-blue" id="m-cron">...</div><div class="metric-sub" id="m-cron-sub">Loading</div></div>
+    <div class="metric"><div class="metric-label">Config Version</div><div class="metric-value v-green" id="m-config">...</div><div class="metric-sub">Hermes config</div></div>
+    <div class="metric"><div class="metric-label">Auth Required</div><div class="metric-value" id="m-auth" style="font-size:14px;margin-top:6px;">...</div><div class="metric-sub">Security mode</div></div>
+    <div class="metric"><div class="metric-label">Gateway PID</div><div class="metric-value v-green" id="m-pid">...</div><div class="metric-sub">Process ID</div></div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- PROJECTS + TASKS + RIGHT -->
   <div class="grid-3">
 
-    <!-- PROJECTS -->
     <div class="card">
       <div class="card-header">
         <span class="card-title">Active Projects</span>
         <span class="badge b-blue">6 running</span>
       </div>
-      <div class="row">
-        <div class="icon-box ib-red">🏢</div>
-        <div class="row-info">
-          <div class="row-title">NAAAS Digital Ecosystem</div>
-          <div class="row-sub">Sikhon · July 2026</div>
-          <div class="prog-wrap"><div class="prog-label"><span>Pre-build</span><span>10%</span></div><div class="prog-bar"><div class="prog-fill pf-red" style="width:10%"></div></div></div>
-        </div>
-        <span class="badge b-red" style="white-space:nowrap;">CRITICAL</span>
-      </div>
-      <div class="row">
-        <div class="icon-box ib-amber">⚖️</div>
-        <div class="row-info">
-          <div class="row-title">Legal Registration</div>
-          <div class="row-sub">Sikhon · June 2026</div>
-          <div class="prog-wrap"><div class="prog-label"><span>In Progress</span><span>40%</span></div><div class="prog-bar"><div class="prog-fill pf-amber" style="width:40%"></div></div></div>
-        </div>
-        <span class="badge b-amber">HIGH</span>
-      </div>
-      <div class="row">
-        <div class="icon-box ib-blue">🤖</div>
-        <div class="row-info">
-          <div class="row-title">AI Review SaaS</div>
-          <div class="row-sub">Sikhon · Q3 2026</div>
-          <div class="prog-wrap"><div class="prog-label"><span>Spec phase</span><span>5%</span></div><div class="prog-bar"><div class="prog-fill pf-blue" style="width:5%"></div></div></div>
-        </div>
-        <span class="badge b-blue">HIGH</span>
-      </div>
-      <div class="row">
-        <div class="icon-box ib-blue">✅</div>
-        <div class="row-info">
-          <div class="row-title">Content Approval SaaS</div>
-          <div class="row-sub">Sikhon · Q3 2026</div>
-          <div class="prog-wrap"><div class="prog-label"><span>Spec phase</span><span>5%</span></div><div class="prog-bar"><div class="prog-fill pf-blue" style="width:5%"></div></div></div>
-        </div>
-        <span class="badge b-blue">HIGH</span>
-      </div>
-      <div class="row">
-        <div class="icon-box ib-blue">🏘️</div>
-        <div class="row-info">
-          <div class="row-title">BluLife Community OS</div>
-          <div class="row-sub">Sikhon · Ongoing</div>
-          <div class="prog-wrap"><div class="prog-label"><span>Outreach</span><span>15%</span></div><div class="prog-bar"><div class="prog-fill pf-blue" style="width:15%"></div></div></div>
-        </div>
-        <span class="badge b-muted">MED</span>
-      </div>
-      <div class="row">
-        <div class="icon-box ib-red">🐛</div>
-        <div class="row-info">
-          <div class="row-title">Website Bug Fix</div>
-          <div class="row-sub">Tahsin · ASAP</div>
-          <div class="prog-wrap"><div class="prog-label"><span>Pending</span><span>0%</span></div><div class="prog-bar"><div class="prog-fill pf-red" style="width:0%"></div></div></div>
-        </div>
-        <span class="badge b-red">ASAP</span>
-      </div>
+      <div class="row"><div class="icon-box ib-red">🏢</div><div class="row-info"><div class="row-title">NAAAS Digital Ecosystem</div><div class="row-sub">Sikhon · July 2026</div><div class="prog-wrap"><div class="prog-label"><span>Pre-build</span><span>10%</span></div><div class="prog-bar"><div class="prog-fill pf-red" style="width:10%"></div></div></div></div><span class="badge b-red">CRITICAL</span></div>
+      <div class="row"><div class="icon-box ib-amber">⚖️</div><div class="row-info"><div class="row-title">Legal Registration</div><div class="row-sub">Sikhon · June 2026</div><div class="prog-wrap"><div class="prog-label"><span>In Progress</span><span>40%</span></div><div class="prog-bar"><div class="prog-fill pf-amber" style="width:40%"></div></div></div></div><span class="badge b-amber">HIGH</span></div>
+      <div class="row"><div class="icon-box ib-blue">🤖</div><div class="row-info"><div class="row-title">AI Review SaaS</div><div class="row-sub">Sikhon · Q3 2026</div><div class="prog-wrap"><div class="prog-label"><span>Spec phase</span><span>5%</span></div><div class="prog-bar"><div class="prog-fill pf-blue" style="width:5%"></div></div></div></div><span class="badge b-blue">HIGH</span></div>
+      <div class="row"><div class="icon-box ib-blue">✅</div><div class="row-info"><div class="row-title">Content Approval SaaS</div><div class="row-sub">Sikhon · Q3 2026</div><div class="prog-wrap"><div class="prog-label"><span>Spec phase</span><span>5%</span></div><div class="prog-bar"><div class="prog-fill pf-blue" style="width:5%"></div></div></div></div><span class="badge b-blue">HIGH</span></div>
+      <div class="row"><div class="icon-box ib-blue">🏘️</div><div class="row-info"><div class="row-title">BluLife Community OS</div><div class="row-sub">Sikhon · Ongoing</div><div class="prog-wrap"><div class="prog-label"><span>Outreach</span><span>15%</span></div><div class="prog-bar"><div class="prog-fill pf-blue" style="width:15%"></div></div></div></div><span class="badge b-muted">MED</span></div>
+      <div class="row"><div class="icon-box ib-red">🐛</div><div class="row-info"><div class="row-title">Website Bug Fix</div><div class="row-sub">Tahsin · ASAP</div><div class="prog-wrap"><div class="prog-label"><span>Pending</span><span>0%</span></div><div class="prog-bar"><div class="prog-fill pf-red" style="width:0%"></div></div></div></div><span class="badge b-red">ASAP</span></div>
     </div>
 
-    <!-- TASKS -->
     <div class="card">
       <div class="card-header">
         <span class="card-title">Task Board</span>
@@ -195,58 +138,24 @@
       </div>
     </div>
 
-    <!-- RIGHT COLUMN -->
     <div style="display:flex;flex-direction:column;gap:16px;">
-
-      <!-- TEAM -->
       <div class="card">
-        <div class="card-header">
-          <span class="card-title">Team</span>
-          <span class="badge b-green">2 active</span>
-        </div>
-        <div class="row">
-          <div class="avatar av-ceo">SI</div>
-          <div class="row-info"><div class="row-title">Sikhon</div><div class="row-sub">Founder & CEO · Admin</div></div>
-          <span class="badge b-green" style="font-size:10px;">● Online</span>
-        </div>
-        <div class="row">
-          <div class="avatar av-emp">TH</div>
-          <div class="row-info"><div class="row-title">Tahsin Hasan</div><div class="row-sub">Graphic Designer</div></div>
-          <span class="badge b-amber" style="font-size:10px;">● Employee</span>
-        </div>
+        <div class="card-header"><span class="card-title">Team</span><span class="badge b-green">2 active</span></div>
+        <div class="row"><div class="avatar av-ceo">SI</div><div class="row-info"><div class="row-title">Sikhon</div><div class="row-sub">Founder & CEO · Admin</div></div><span class="badge b-green">● Online</span></div>
+        <div class="row"><div class="avatar av-emp">TH</div><div class="row-info"><div class="row-title">Tahsin Hasan</div><div class="row-sub">Graphic Designer</div></div><span class="badge b-amber">● Employee</span></div>
       </div>
 
-      <!-- LIVE CRON JOBS -->
       <div class="card">
-        <div class="card-header">
-          <span class="card-title">Cron Jobs</span>
-          <span class="badge b-green" id="cron-badge">Loading...</span>
-        </div>
-        <div id="cron-list">
-          <div style="font-size:12px;color:var(--text-muted);padding:8px 0;">Fetching from Hermes...</div>
-        </div>
+        <div class="card-header"><span class="card-title">Live Cron Jobs</span><span class="badge b-green" id="cron-badge">Loading...</span></div>
+        <div id="cron-list"><div style="font-size:12px;color:var(--text-muted);">Fetching from Hermes...</div></div>
       </div>
 
-      <!-- PIPELINE -->
       <div class="card">
-        <div class="card-header">
-          <span class="card-title">Business Pipeline</span>
-          <span class="badge b-blue">New biz</span>
-        </div>
-        <div style="background:var(--navy-600);border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:8px;">
-          <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:13px;font-weight:500;">NAAAS Holdings</span><span style="font-size:11px;color:var(--blue-light);">Anchor</span></div>
-          <div style="font-size:10px;color:var(--text-muted);">Contract · July 2026</div>
-        </div>
-        <div style="background:var(--navy-600);border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:8px;">
-          <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:13px;font-weight:500;">AI Review SaaS</span><span style="font-size:11px;color:var(--blue-light);">MRR</span></div>
-          <div style="font-size:10px;color:var(--text-muted);">Product · Q3 2026</div>
-        </div>
-        <div style="background:var(--navy-600);border:1px solid var(--border);border-radius:8px;padding:10px;">
-          <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:13px;font-weight:500;">Content Approval SaaS</span><span style="font-size:11px;color:var(--blue-light);">MRR</span></div>
-          <div style="font-size:10px;color:var(--text-muted);">Product · Q3 2026</div>
-        </div>
+        <div class="card-header"><span class="card-title">Business Pipeline</span><span class="badge b-blue">New biz</span></div>
+        <div style="background:var(--navy-600);border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:8px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:13px;font-weight:500;">NAAAS Holdings</span><span style="font-size:11px;color:var(--blue-light);">Anchor</span></div><div style="font-size:10px;color:var(--text-muted);">Contract · July 2026</div></div>
+        <div style="background:var(--navy-600);border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:8px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:13px;font-weight:500;">AI Review SaaS</span><span style="font-size:11px;color:var(--blue-light);">MRR</span></div><div style="font-size:10px;color:var(--text-muted);">Product · Q3 2026</div></div>
+        <div style="background:var(--navy-600);border:1px solid var(--border);border-radius:8px;padding:10px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:13px;font-weight:500;">Content Approval SaaS</span><span style="font-size:11px;color:var(--blue-light);">MRR</span></div><div style="font-size:10px;color:var(--text-muted);">Product · Q3 2026</div></div>
       </div>
-
     </div>
   </div>
 
@@ -254,26 +163,21 @@
 <footer>OceanBlu Digital Ltd · Powered by Hermes Agent · Trust Built Grow · <span id="footer-time"></span></footer>
 
 <script>
-const HERMES = 'https://hermes-agent-production-3245.up.railway.app';
-const USERNAME = 'oceanblu';
-let TOKEN = sessionStorage.getItem('hermes-token') || null;
+const PROXY = 'https://hermes-proxy-production-a1ed.up.railway.app';
+const DASHBOARD_PASS = 'all-in-one-bundle';
+let TOKEN = sessionStorage.getItem('ob-token') || null;
 
 // CLOCK
 function updateClock(){
-  const now = new Date();
-  const b = new Date(now.toLocaleString('en-US',{timeZone:'Asia/Dhaka'}));
+  const b = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Dhaka'}));
   const p = n => n.toString().padStart(2,'0');
-  const ds = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const ms = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const str = `${ds[b.getDay()]} ${b.getDate()} ${ms[b.getMonth()]} · ${p(b.getHours())}:${p(b.getMinutes())}:${p(b.getSeconds())} BST`;
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const str = `${days[b.getDay()]} ${b.getDate()} ${months[b.getMonth()]} · ${p(b.getHours())}:${p(b.getMinutes())}:${p(b.getSeconds())} BST`;
   document.getElementById('clock').textContent = str;
   document.getElementById('footer-time').textContent = 'Last refresh: ' + str;
 }
 updateClock(); setInterval(updateClock, 1000);
-
-// DATE
-const now = new Date();
-const ms2 = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 // LOGIN
 async function doLogin(){
@@ -282,16 +186,15 @@ async function doLogin(){
   document.getElementById('login-error').style.display = 'none';
   document.getElementById('login-loading').style.display = 'block';
   try {
-    const res = await fetch(`${HERMES}/auth/password-login`, {
+    const res = await fetch(`${PROXY}/auth/validate`, {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({username: USERNAME, password: pass}),
-      credentials: 'include'
+      body: JSON.stringify({password: pass})
     });
     const data = await res.json();
-    if(res.ok){
-      TOKEN = data.token || data.access_token || data.session_token || 'session';
-      sessionStorage.setItem('hermes-token', TOKEN);
+    if(data.valid){
+      TOKEN = pass;
+      sessionStorage.setItem('ob-token', TOKEN);
       document.getElementById('login-overlay').style.display = 'none';
       loadAllData();
     } else {
@@ -299,124 +202,110 @@ async function doLogin(){
       document.getElementById('login-error').style.display = 'block';
     }
   } catch(e){
-    // Try cookie-based session — some Hermes versions use cookies not tokens
-    TOKEN = 'cookie-auth';
-    sessionStorage.setItem('hermes-token', TOKEN);
-    document.getElementById('login-overlay').style.display = 'none';
-    loadAllData();
+    document.getElementById('login-loading').style.display = 'none';
+    document.getElementById('login-error').textContent = 'Connection error. Try again.';
+    document.getElementById('login-error').style.display = 'block';
   }
 }
 
 function doLogout(){
-  sessionStorage.removeItem('hermes-token');
+  sessionStorage.removeItem('ob-token');
   TOKEN = null;
   document.getElementById('login-pass').value = '';
   document.getElementById('login-overlay').style.display = 'flex';
 }
 
-// API FETCH
-async function hFetch(endpoint){
-  const headers = {'Content-Type':'application/json'};
-  if(TOKEN && TOKEN !== 'cookie-auth') headers['Authorization'] = `Bearer ${TOKEN}`;
-  const res = await fetch(`${HERMES}${endpoint}`, {headers, credentials:'include'});
-  if(!res.ok) throw new Error(res.status);
+// API
+async function pubFetch(endpoint){
+  const res = await fetch(`${PROXY}/pub${endpoint}`);
+  return res.json();
+}
+
+async function hermFetch(endpoint){
+  const res = await fetch(`${PROXY}/hermes${endpoint}`, {
+    headers: {'X-Dashboard-Token': TOKEN}
+  });
   return res.json();
 }
 
 // LOAD STATUS
 async function loadStatus(){
   try {
-    const d = await hFetch('/api/status');
+    const d = await pubFetch('/api/status');
     const running = d.gateway_running;
-    const state = d.gateway_state || 'unknown';
-    const dot = document.getElementById('hermes-dot');
-    const txt = document.getElementById('hermes-status-text');
-    dot.style.background = running ? '#39d98a' : '#ff4d4d';
-    txt.textContent = running ? 'Hermes Running' : 'Gateway Stopped';
+    const state = (d.gateway_state || 'unknown');
+
+    document.getElementById('hermes-dot').style.background = running ? '#39d98a' : '#ff4d4d';
+    document.getElementById('hermes-status-text').textContent = running ? 'Hermes Running' : 'Gateway Stopped';
     document.getElementById('m-gateway').textContent = state.charAt(0).toUpperCase() + state.slice(1);
     document.getElementById('m-gateway').style.color = running ? '#39d98a' : '#ff4d4d';
-    document.getElementById('m-gateway-sub').textContent = running ? 'Gateway active' : 'Check Railway';
+    document.getElementById('m-gateway-sub').textContent = running ? 'All systems operational' : 'Check Railway console';
     document.getElementById('m-sessions').textContent = d.active_sessions ?? 0;
     document.getElementById('m-version').textContent = 'v' + (d.version || '0.16.0');
-    const updated = d.gateway_updated_at ? new Date(d.gateway_updated_at).toLocaleTimeString('en-GB') : 'N/A';
-    document.getElementById('last-updated').textContent = 'Last gateway update: ' + updated;
-    if(d.gateway_platforms && d.gateway_platforms.discord){
-      document.getElementById('discord-dot').style.background = '#39d98a';
-      document.getElementById('discord-status-text').textContent = 'Discord Active';
+    document.getElementById('m-release').textContent = 'Released ' + (d.release_date || '2026.6.5');
+    document.getElementById('m-config').textContent = d.config_version || '27';
+    document.getElementById('m-auth').textContent = d.auth_required ? 'Enabled' : 'Disabled';
+    document.getElementById('m-auth').style.color = d.auth_required ? '#39d98a' : '#f5c518';
+    document.getElementById('m-pid').textContent = d.gateway_pid || 'N/A';
+
+    const discord = d.gateway_platforms?.discord;
+    if(discord){
+      document.getElementById('discord-dot').style.background = discord.state === 'connected' ? '#39d98a' : '#ff4d4d';
+      document.getElementById('discord-text').textContent = 'Discord ' + (discord.state === 'connected' ? '● Connected' : '● Disconnected');
+      document.getElementById('m-discord').textContent = discord.state === 'connected' ? 'Connected' : 'Disconnected';
+      document.getElementById('m-discord').style.color = discord.state === 'connected' ? '#39d98a' : '#ff4d4d';
     }
+
+    const updated = d.gateway_updated_at ? new Date(d.gateway_updated_at).toLocaleTimeString('en-GB') : 'N/A';
+    document.getElementById('last-updated').textContent = 'Gateway updated: ' + updated;
   } catch(e){
     document.getElementById('m-gateway').textContent = 'Error';
     document.getElementById('m-gateway').style.color = '#ff4d4d';
-    document.getElementById('last-updated').textContent = 'Could not reach Hermes API';
-  }
-}
-
-// LOAD SYSTEM STATS
-async function loadStats(){
-  try {
-    const d = await hFetch('/api/system/stats');
-    document.getElementById('m-cpu').textContent = (d.cpu_percent ?? d.cpu ?? '—') + (d.cpu_percent !== undefined ? '%' : '');
-    const mem = d.memory_percent ?? d.memory ?? d.ram ?? '—';
-    document.getElementById('m-mem').textContent = typeof mem === 'number' ? mem.toFixed(1) + '%' : mem;
-    const uptime = d.uptime_seconds ?? d.uptime ?? null;
-    if(uptime){
-      const h = Math.floor(uptime/3600);
-      const m = Math.floor((uptime%3600)/60);
-      document.getElementById('m-uptime').textContent = `${h}h ${m}m`;
-    } else {
-      document.getElementById('m-uptime').textContent = d.uptime || '—';
-    }
-    document.getElementById('m-model').textContent = d.model || d.active_model || 'nemotron-3-super:free';
-  } catch(e){
-    ['m-cpu','m-mem','m-uptime'].forEach(id => document.getElementById(id).textContent = '—');
-    document.getElementById('m-model').textContent = 'nemotron-3-super:free';
   }
 }
 
 // LOAD CRON JOBS
 async function loadCron(){
   try {
-    const d = await hFetch('/api/cron/jobs');
-    const jobs = d.jobs || d || [];
+    const d = await hermFetch('/api/cron/jobs');
+    const jobs = Array.isArray(d) ? d : (d.jobs || []);
+    document.getElementById('m-cron').textContent = jobs.length;
+    document.getElementById('m-cron-sub').textContent = jobs.filter(j=>j.enabled).length + ' enabled';
+    document.getElementById('cron-badge').textContent = jobs.length + ' jobs';
     if(!jobs.length){
-      document.getElementById('cron-list').innerHTML = '<div style="font-size:12px;color:var(--text-muted);padding:8px 0;">No cron jobs configured yet.</div>';
-      document.getElementById('cron-badge').textContent = '0 jobs';
+      document.getElementById('cron-list').innerHTML = '<div style="font-size:12px;color:var(--text-muted);padding:8px 0;">No cron jobs yet. Use /cron in Discord.</div>';
       return;
     }
-    document.getElementById('cron-badge').textContent = jobs.length + ' active';
-    document.getElementById('cron-list').innerHTML = jobs.map(j => `
+    document.getElementById('cron-list').innerHTML = jobs.map(j=>`
       <div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);">
-        <div style="width:6px;height:6px;border-radius:50%;background:${j.enabled||j.active ? '#39d98a':'#ff4d4d'};flex-shrink:0;"></div>
+        <div style="width:6px;height:6px;border-radius:50%;background:${j.enabled?'#39d98a':'#ff4d4d'};flex-shrink:0;"></div>
         <div style="flex:1;min-width:0;">
           <div style="font-size:12px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${j.name||j.id||'Job'}</div>
           <div style="font-size:10px;color:var(--text-muted);">${j.schedule||j.cron||''}</div>
         </div>
-        <span class="badge ${j.enabled||j.active?'b-green':'b-muted'}" style="font-size:9px;">${j.enabled||j.active?'ON':'OFF'}</span>
+        <span class="badge ${j.enabled?'b-green':'b-muted'}" style="font-size:9px;">${j.enabled?'ON':'OFF'}</span>
       </div>
     `).join('');
   } catch(e){
-    document.getElementById('cron-list').innerHTML = '<div style="font-size:12px;color:var(--text-muted);padding:8px 0;">Set up cron jobs in Hermes Discord with /cron</div>';
-    document.getElementById('cron-badge').textContent = 'No jobs';
+    document.getElementById('cron-list').innerHTML = '<div style="font-size:12px;color:var(--text-muted);">Use /cron in Discord to set up jobs.</div>';
+    document.getElementById('m-cron').textContent = '—';
   }
 }
 
-// LOAD ALL
 async function loadAllData(){
-  await Promise.all([loadStatus(), loadStats(), loadCron()]);
+  await Promise.all([loadStatus(), loadCron()]);
   renderTasks();
 }
 
-function refreshData(){
-  if(TOKEN) loadAllData();
-}
+function refreshData(){ if(TOKEN) loadAllData(); }
 
-// CHECK EXISTING SESSION
+// AUTO-CHECK SESSION
 if(TOKEN){
   document.getElementById('login-overlay').style.display = 'none';
   loadAllData();
 }
 
-// TASKS (localStorage)
+// TASKS
 let tasks = JSON.parse(localStorage.getItem('ob-tasks')) || [
   {text:'Send NAAAS project kickoff brief',done:false,due:'Today',priority:'critical'},
   {text:'Complete legal registration docs',done:false,due:'This week',priority:'high'},
@@ -424,10 +313,10 @@ let tasks = JSON.parse(localStorage.getItem('ob-tasks')) || [
   {text:'Draft 2 cold outreach emails',done:false,due:'This week',priority:'medium'},
   {text:'Update revenue log',done:false,due:'Today',priority:'medium'},
 ];
-const pBadge = {critical:'b-red',high:'b-amber',medium:'b-blue'};
+const pBadge={critical:'b-red',high:'b-amber',medium:'b-blue'};
 function saveTasks(){localStorage.setItem('ob-tasks',JSON.stringify(tasks));}
 function renderTasks(){
-  document.getElementById('task-list').innerHTML = tasks.map((t,i) => `
+  document.getElementById('task-list').innerHTML=tasks.map((t,i)=>`
     <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);">
       <div onclick="toggleTask(${i})" style="width:16px;height:16px;border-radius:4px;border:1.5px solid ${t.done?'#39d98a':'var(--text-muted)'};background:${t.done?'#39d98a':'transparent'};flex-shrink:0;margin-top:1px;cursor:pointer;"></div>
       <div style="flex:1;">
@@ -437,17 +326,16 @@ function renderTasks(){
       <span class="badge ${pBadge[t.priority]||'b-muted'}" style="font-size:9px;white-space:nowrap;">${t.priority}</span>
     </div>
   `).join('');
-  const done = tasks.filter(t => t.done).length;
-  document.getElementById('done-count').textContent = done + ' done';
-  document.getElementById('tasks-total').textContent = tasks.length;
-  document.getElementById('tasks-overdue').textContent = tasks.filter(t => !t.done && (t.due==='ASAP'||t.due==='Today')).length;
-  document.getElementById('tasks-sub').textContent = done + ' completed · ' + (tasks.length - done) + ' remaining';
+  const done=tasks.filter(t=>t.done).length;
+  document.getElementById('done-count').textContent=done+' done';
+  document.getElementById('tasks-total').textContent=tasks.length;
+  document.getElementById('tasks-sub').textContent=done+' completed · '+(tasks.length-done)+' remaining';
 }
 function toggleTask(i){tasks[i].done=!tasks[i].done;saveTasks();renderTasks();}
 function addTask(){
-  const inp = document.getElementById('task-input');
-  const val = inp.value.trim();
-  if(!val) return;
+  const inp=document.getElementById('task-input');
+  const val=inp.value.trim();
+  if(!val)return;
   tasks.unshift({text:val,done:false,due:'Today',priority:'medium'});
   saveTasks();renderTasks();inp.value='';
 }
