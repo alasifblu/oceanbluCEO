@@ -1,0 +1,9 @@
+{
+  "gateway_running": false,
+  "gateway_state": "initializing",
+  "active_sessions": 0,
+  "version": "0.16.0",
+  "discord_connected": false,
+  "last_updated": "never",
+  "cron_jobs": []
+}
