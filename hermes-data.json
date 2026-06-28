@@ -1,9 +1,10 @@
 {
   "gateway_running": false,
-  "gateway_state": "initializing",
+  "gateway_state": "stopped",
   "active_sessions": 0,
   "version": "0.16.0",
   "discord_connected": false,
-  "last_updated": "never",
-  "cron_jobs": []
+  "cron_jobs": 0,
+  "last_updated": "2026-06-28T19:33:27Z",
+  "last_updated_bst": "19:33 BST"
 }
