@@ -12,10 +12,9 @@
 .login-input{width:100%;background:#111d35;border:1px solid #1e3a6e55;border-radius:8px;padding:12px 16px;color:#fff;font-size:14px;outline:none;font-family:'Inter',sans-serif;margin-bottom:12px;transition:border-color .2s;box-sizing:border-box;}
 .login-input:focus{border-color:#1a6fff;}
 .login-input::placeholder{color:#3d5a7a;}
-.login-btn{width:100%;background:#1a6fff;border:none;border-radius:8px;padding:12px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;transition:opacity .2s;font-family:'Inter',sans-serif;}
+.login-btn{width:100%;background:#1a6fff;border:none;border-radius:8px;padding:12px;color:#fff;font-size:14px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;}
 .login-btn:hover{opacity:.85;}
 .login-error{color:#ff4d4d;font-size:12px;margin-top:8px;display:none;}
-.login-loading{color:#7a9cc4;font-size:12px;margin-top:8px;display:none;}
 </style>
 </head>
 <body>
@@ -26,11 +25,10 @@
       <span style="font-family:'Bebas Neue',cursive;font-size:28px;letter-spacing:2px;">ocean</span>
       <span style="background:#1a6fff;color:#fff;font-family:'Bebas Neue',cursive;font-size:28px;padding:0 7px;letter-spacing:2px;">Blu</span>
     </div>
-    <div style="font-size:14px;color:#7a9cc4;margin-bottom:24px;">CEO Operations Hub — Secure Login</div>
-    <input class="login-input" type="password" id="login-pass" placeholder="Enter Hermes password..." onkeydown="if(event.key==='Enter')doLogin()">
+    <div style="font-size:14px;color:#7a9cc4;margin-bottom:24px;">CEO Operations Hub</div>
+    <input class="login-input" type="password" id="login-pass" placeholder="Enter dashboard password..." onkeydown="if(event.key==='Enter')doLogin()">
     <button class="login-btn" onclick="doLogin()">Access Dashboard</button>
-    <div class="login-error" id="login-error">Incorrect password. Try again.</div>
-    <div class="login-loading" id="login-loading">Connecting to Hermes...</div>
+    <div class="login-error" id="login-error">Incorrect password.</div>
   </div>
 </div>
 
@@ -40,7 +38,7 @@
     <span class="logo-tag">CEO Operations Hub</span>
   </div>
   <div class="header-right">
-    <div class="pill"><span class="dot" id="hermes-dot" style="background:#f5c518;"></span><span id="hermes-status-text">Connecting...</span></div>
+    <div class="pill"><span class="dot" id="hermes-dot" style="background:#f5c518;"></span><span id="hermes-status-text">Loading...</span></div>
     <div class="pill"><span class="dot" id="discord-dot" style="background:#3d5a7a;"></span><span id="discord-text">Discord</span></div>
     <span class="clock" id="clock"></span>
     <button class="btn" onclick="refreshData()">↺ Refresh</button>
@@ -82,7 +80,7 @@
     <div class="metric">
       <div class="metric-label">Hermes Version</div>
       <div class="metric-value" id="m-version" style="font-size:16px;margin-top:4px;color:#fff;">...</div>
-      <div class="metric-sub" id="m-release">Current build</div>
+      <div class="metric-sub">Current build</div>
     </div>
     <div class="metric">
       <div class="metric-label">Discord</div>
@@ -104,15 +102,14 @@
   <div class="slabel" style="margin-top:20px;">System Health</div>
   <div class="metrics">
     <div class="metric"><div class="metric-label">Cron Jobs</div><div class="metric-value v-blue" id="m-cron">...</div><div class="metric-sub" id="m-cron-sub">Loading</div></div>
-    <div class="metric"><div class="metric-label">Config Version</div><div class="metric-value v-green" id="m-config">...</div><div class="metric-sub">Hermes config</div></div>
-    <div class="metric"><div class="metric-label">Auth Required</div><div class="metric-value" id="m-auth" style="font-size:14px;margin-top:6px;">...</div><div class="metric-sub">Security mode</div></div>
-    <div class="metric"><div class="metric-label">Gateway PID</div><div class="metric-value v-green" id="m-pid">...</div><div class="metric-sub">Process ID</div></div>
+    <div class="metric"><div class="metric-label">Last Push</div><div class="metric-value" id="m-push" style="font-size:13px;margin-top:6px;color:#fff;">...</div><div class="metric-sub">GitHub data sync</div></div>
+    <div class="metric"><div class="metric-label">Model</div><div class="metric-value" id="m-model" style="font-size:11px;margin-top:6px;color:#fff;">Gemini 2.5 Flash</div><div class="metric-sub">Via OpenRouter</div></div>
+    <div class="metric"><div class="metric-label">Data Source</div><div class="metric-value" style="font-size:11px;margin-top:6px;color:#39d98a;">GitHub Live</div><div class="metric-sub">No proxy needed</div></div>
   </div>
 
   <div class="divider"></div>
 
   <div class="grid-3">
-
     <div class="card">
       <div class="card-header">
         <span class="card-title">Active Projects</span>
@@ -146,12 +143,15 @@
       </div>
 
       <div class="card">
-        <div class="card-header"><span class="card-title">Live Cron Jobs</span><span class="badge b-green" id="cron-badge">Loading...</span></div>
-        <div id="cron-list"><div style="font-size:12px;color:var(--text-muted);">Fetching from Hermes...</div></div>
+        <div class="card-header"><span class="card-title">Hermes Schedule</span><span class="badge b-green">Active</span></div>
+        <div class="row" style="padding:8px 0;"><div style="width:6px;height:6px;border-radius:50%;background:#39d98a;flex-shrink:0;"></div><div class="row-info"><div class="row-title" style="font-size:12px;">Daily CEO Report</div></div><span style="font-size:10px;color:var(--text-muted);">9AM BST</span></div>
+        <div class="row" style="padding:8px 0;"><div style="width:6px;height:6px;border-radius:50%;background:#39d98a;flex-shrink:0;"></div><div class="row-info"><div class="row-title" style="font-size:12px;">Weekly Summary</div></div><span style="font-size:10px;color:var(--text-muted);">Sun 8PM</span></div>
+        <div class="row" style="padding:8px 0;"><div style="width:6px;height:6px;border-radius:50%;background:#f5c518;flex-shrink:0;"></div><div class="row-info"><div class="row-title" style="font-size:12px;">Status Push</div></div><span style="font-size:10px;color:var(--text-muted);">Every 5min</span></div>
+        <div class="row" style="padding:8px 0;border:none;"><div style="width:6px;height:6px;border-radius:50%;background:#ff4d4d;flex-shrink:0;"></div><div class="row-info"><div class="row-title" style="font-size:12px;">CEO Alert (4h+ overdue)</div></div><span style="font-size:10px;color:var(--text-muted);">Auto</span></div>
       </div>
 
       <div class="card">
-        <div class="card-header"><span class="card-title">Business Pipeline</span><span class="badge b-blue">New biz</span></div>
+        <div class="card-header"><span class="card-title">Pipeline</span><span class="badge b-blue">New biz</span></div>
         <div style="background:var(--navy-600);border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:8px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:13px;font-weight:500;">NAAAS Holdings</span><span style="font-size:11px;color:var(--blue-light);">Anchor</span></div><div style="font-size:10px;color:var(--text-muted);">Contract · July 2026</div></div>
         <div style="background:var(--navy-600);border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:8px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:13px;font-weight:500;">AI Review SaaS</span><span style="font-size:11px;color:var(--blue-light);">MRR</span></div><div style="font-size:10px;color:var(--text-muted);">Product · Q3 2026</div></div>
         <div style="background:var(--navy-600);border:1px solid var(--border);border-radius:8px;padding:10px;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:13px;font-weight:500;">Content Approval SaaS</span><span style="font-size:11px;color:var(--blue-light);">MRR</span></div><div style="font-size:10px;color:var(--text-muted);">Product · Q3 2026</div></div>
@@ -163,9 +163,9 @@
 <footer>OceanBlu Digital Ltd · Powered by Hermes Agent · Trust Built Grow · <span id="footer-time"></span></footer>
 
 <script>
-const PROXY = 'https://hermes-proxy-production-a1ed.up.railway.app';
 const DASHBOARD_PASS = 'all-in-one-bundle';
-let TOKEN = sessionStorage.getItem('ob-token') || null;
+const DATA_URL = 'https://raw.githubusercontent.com/alasifblu/oceanbluCEO/main/hermes-data.json';
+let loggedIn = sessionStorage.getItem('ob-auth') === 'true';
 
 // CLOCK
 function updateClock(){
@@ -179,130 +179,63 @@ function updateClock(){
 }
 updateClock(); setInterval(updateClock, 1000);
 
-// LOGIN
-async function doLogin(){
+// LOGIN — simple local password check, no proxy needed
+function doLogin(){
   const pass = document.getElementById('login-pass').value.trim();
-  if(!pass) return;
-  document.getElementById('login-error').style.display = 'none';
-  document.getElementById('login-loading').style.display = 'block';
-  try {
-    const res = await fetch(`${PROXY}/auth/validate`, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({password: pass})
-    });
-    const data = await res.json();
-    if(data.valid){
-      TOKEN = pass;
-      sessionStorage.setItem('ob-token', TOKEN);
-      document.getElementById('login-overlay').style.display = 'none';
-      loadAllData();
-    } else {
-      document.getElementById('login-loading').style.display = 'none';
-      document.getElementById('login-error').style.display = 'block';
-    }
-  } catch(e){
-    document.getElementById('login-loading').style.display = 'none';
-    document.getElementById('login-error').textContent = 'Connection error. Try again.';
+  if(pass === DASHBOARD_PASS){
+    sessionStorage.setItem('ob-auth', 'true');
+    document.getElementById('login-overlay').style.display = 'none';
+    loadData();
+  } else {
     document.getElementById('login-error').style.display = 'block';
   }
 }
 
 function doLogout(){
-  sessionStorage.removeItem('ob-token');
-  TOKEN = null;
+  sessionStorage.removeItem('ob-auth');
   document.getElementById('login-pass').value = '';
   document.getElementById('login-overlay').style.display = 'flex';
 }
 
-// API
-async function pubFetch(endpoint){
-  const res = await fetch(`${PROXY}/pub${endpoint}`);
-  return res.json();
-}
-
-async function hermFetch(endpoint){
-  const res = await fetch(`${PROXY}/hermes${endpoint}`, {
-    headers: {'X-Dashboard-Token': TOKEN}
-  });
-  return res.json();
-}
-
-// LOAD STATUS
-async function loadStatus(){
+// LOAD DATA FROM GITHUB
+async function loadData(){
   try {
-    const d = await pubFetch('/api/status');
-    const running = d.gateway_running;
-    const state = (d.gateway_state || 'unknown');
+    const res = await fetch(DATA_URL + '?t=' + Date.now());
+    const d = await res.json();
 
+    const running = d.gateway_running;
     document.getElementById('hermes-dot').style.background = running ? '#39d98a' : '#ff4d4d';
     document.getElementById('hermes-status-text').textContent = running ? 'Hermes Running' : 'Gateway Stopped';
-    document.getElementById('m-gateway').textContent = state.charAt(0).toUpperCase() + state.slice(1);
+    document.getElementById('m-gateway').textContent = running ? 'Running' : 'Stopped';
     document.getElementById('m-gateway').style.color = running ? '#39d98a' : '#ff4d4d';
-    document.getElementById('m-gateway-sub').textContent = running ? 'All systems operational' : 'Check Railway console';
+    document.getElementById('m-gateway-sub').textContent = d.gateway_state || 'unknown';
     document.getElementById('m-sessions').textContent = d.active_sessions ?? 0;
     document.getElementById('m-version').textContent = 'v' + (d.version || '0.16.0');
-    document.getElementById('m-release').textContent = 'Released ' + (d.release_date || '2026.6.5');
-    document.getElementById('m-config').textContent = d.config_version || '27';
-    document.getElementById('m-auth').textContent = d.auth_required ? 'Enabled' : 'Disabled';
-    document.getElementById('m-auth').style.color = d.auth_required ? '#39d98a' : '#f5c518';
-    document.getElementById('m-pid').textContent = d.gateway_pid || 'N/A';
 
-    const discord = d.gateway_platforms?.discord;
-    if(discord){
-      document.getElementById('discord-dot').style.background = discord.state === 'connected' ? '#39d98a' : '#ff4d4d';
-      document.getElementById('discord-text').textContent = 'Discord ' + (discord.state === 'connected' ? '● Connected' : '● Disconnected');
-      document.getElementById('m-discord').textContent = discord.state === 'connected' ? 'Connected' : 'Disconnected';
-      document.getElementById('m-discord').style.color = discord.state === 'connected' ? '#39d98a' : '#ff4d4d';
-    }
+    const discord = d.discord_connected;
+    document.getElementById('discord-dot').style.background = discord ? '#39d98a' : '#ff4d4d';
+    document.getElementById('discord-text').textContent = discord ? 'Discord ● Connected' : 'Discord ● Offline';
+    document.getElementById('m-discord').textContent = discord ? 'Connected' : 'Offline';
+    document.getElementById('m-discord').style.color = discord ? '#39d98a' : '#ff4d4d';
 
-    const updated = d.gateway_updated_at ? new Date(d.gateway_updated_at).toLocaleTimeString('en-GB') : 'N/A';
-    document.getElementById('last-updated').textContent = 'Gateway updated: ' + updated;
+    document.getElementById('m-cron').textContent = d.cron_jobs ?? '1';
+    document.getElementById('m-cron-sub').textContent = 'Active jobs';
+
+    const updated = d.last_updated_bst || d.last_updated || 'Never';
+    document.getElementById('last-updated').textContent = 'Data pushed: ' + updated;
+    document.getElementById('m-push').textContent = updated;
+
   } catch(e){
-    document.getElementById('m-gateway').textContent = 'Error';
-    document.getElementById('m-gateway').style.color = '#ff4d4d';
+    document.getElementById('m-gateway').textContent = 'No data';
+    document.getElementById('last-updated').textContent = 'Could not fetch from GitHub';
   }
 }
 
-// LOAD CRON JOBS
-async function loadCron(){
-  try {
-    const d = await hermFetch('/api/cron/jobs');
-    const jobs = Array.isArray(d) ? d : (d.jobs || []);
-    document.getElementById('m-cron').textContent = jobs.length;
-    document.getElementById('m-cron-sub').textContent = jobs.filter(j=>j.enabled).length + ' enabled';
-    document.getElementById('cron-badge').textContent = jobs.length + ' jobs';
-    if(!jobs.length){
-      document.getElementById('cron-list').innerHTML = '<div style="font-size:12px;color:var(--text-muted);padding:8px 0;">No cron jobs yet. Use /cron in Discord.</div>';
-      return;
-    }
-    document.getElementById('cron-list').innerHTML = jobs.map(j=>`
-      <div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);">
-        <div style="width:6px;height:6px;border-radius:50%;background:${j.enabled?'#39d98a':'#ff4d4d'};flex-shrink:0;"></div>
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:12px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${j.name||j.id||'Job'}</div>
-          <div style="font-size:10px;color:var(--text-muted);">${j.schedule||j.cron||''}</div>
-        </div>
-        <span class="badge ${j.enabled?'b-green':'b-muted'}" style="font-size:9px;">${j.enabled?'ON':'OFF'}</span>
-      </div>
-    `).join('');
-  } catch(e){
-    document.getElementById('cron-list').innerHTML = '<div style="font-size:12px;color:var(--text-muted);">Use /cron in Discord to set up jobs.</div>';
-    document.getElementById('m-cron').textContent = '—';
-  }
-}
+function refreshData(){ if(loggedIn || sessionStorage.getItem('ob-auth')==='true') loadData(); }
 
-async function loadAllData(){
-  await Promise.all([loadStatus(), loadCron()]);
-  renderTasks();
-}
-
-function refreshData(){ if(TOKEN) loadAllData(); }
-
-// AUTO-CHECK SESSION
-if(TOKEN){
+if(loggedIn){
   document.getElementById('login-overlay').style.display = 'none';
-  loadAllData();
+  loadData();
 }
 
 // TASKS
@@ -340,6 +273,7 @@ function addTask(){
   saveTasks();renderTasks();inp.value='';
 }
 document.getElementById('task-input').addEventListener('keydown',e=>{if(e.key==='Enter')addTask();});
+renderTasks();
 </script>
 </body>
 </html>
