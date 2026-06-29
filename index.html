@@ -61,7 +61,7 @@
   <div class="slabel">Active Alerts</div>
   <div id="alerts-wrap">
     <div class="alert a-red"><span>⚠</span><span><strong>OceanBlu Website Bug Fix</strong> — assigned to Tahsin, ASAP. No update in 24h.</span></div>
-    <div class="alert a-amber"><span>◉</span><span><strong>Legal Registration</strong> — deadline June 2026. Confirm status.</span></div>
+    <div class="alert a-amber"><span>◉</span><span><strong>Legal Registration</strong> — deadline this month. Confirm status.</span></div>
     <div class="alert a-blue"><span>◈</span><span><strong>NAAAS Digital Ecosystem</strong> — contract starts July 2026. Pre-build active.</span></div>
   </div>
 
@@ -75,17 +75,17 @@
     <div class="metric">
       <div class="metric-label">Active Sessions</div>
       <div class="metric-value v-blue" id="m-sessions">...</div>
-      <div class="metric-sub">Live agent sessions</div>
+      <div class="metric-sub" id="m-sessions-sub">Live agent sessions</div>
     </div>
     <div class="metric">
       <div class="metric-label">Hermes Version</div>
-      <div class="metric-value" id="m-version" style="font-size:16px;margin-top:4px;color:#fff;">...</div>
-      <div class="metric-sub">Current build</div>
+      <div class="metric-value" id="m-version" style="font-size:14px;margin-top:4px;color:#fff;">...</div>
+      <div class="metric-sub" id="m-release">Current build</div>
     </div>
     <div class="metric">
       <div class="metric-label">Discord</div>
       <div class="metric-value" id="m-discord" style="font-size:16px;margin-top:4px;color:#f5c518;">...</div>
-      <div class="metric-sub">Gateway channel</div>
+      <div class="metric-sub">OceanBlu server</div>
     </div>
     <div class="metric">
       <div class="metric-label">Tasks Today</div>
@@ -101,10 +101,12 @@
 
   <div class="slabel" style="margin-top:20px;">System Health</div>
   <div class="metrics">
-    <div class="metric"><div class="metric-label">Cron Jobs</div><div class="metric-value v-blue" id="m-cron">...</div><div class="metric-sub" id="m-cron-sub">Loading</div></div>
-    <div class="metric"><div class="metric-label">Last Push</div><div class="metric-value" id="m-push" style="font-size:13px;margin-top:6px;color:#fff;">...</div><div class="metric-sub">GitHub data sync</div></div>
-    <div class="metric"><div class="metric-label">Model</div><div class="metric-value" id="m-model" style="font-size:11px;margin-top:6px;color:#fff;">Gemini 2.5 Flash</div><div class="metric-sub">Via OpenRouter</div></div>
-    <div class="metric"><div class="metric-label">Data Source</div><div class="metric-value" style="font-size:11px;margin-top:6px;color:#39d98a;">GitHub Live</div><div class="metric-sub">No proxy needed</div></div>
+    <div class="metric"><div class="metric-label">AI Model</div><div class="metric-value" id="m-model" style="font-size:11px;margin-top:6px;color:#fff;">...</div><div class="metric-sub" id="m-provider">...</div></div>
+    <div class="metric"><div class="metric-label">Cron Jobs</div><div class="metric-value v-blue" id="m-cron">...</div><div class="metric-sub" id="m-cron-sub">Active</div></div>
+    <div class="metric"><div class="metric-label">Kanban Tasks</div><div class="metric-value v-blue" id="m-kanban">...</div><div class="metric-sub" id="m-kanban-sub">Loading</div></div>
+    <div class="metric"><div class="metric-label">Last Data Push</div><div class="metric-value" id="m-push" style="font-size:12px;margin-top:6px;color:#39d98a;">...</div><div class="metric-sub">GitHub sync · 5min</div></div>
+    <div class="metric"><div class="metric-label">Config Version</div><div class="metric-value v-green" id="m-config">...</div><div class="metric-sub">Hermes config</div></div>
+    <div class="metric"><div class="metric-label">Gateway PID</div><div class="metric-value v-green" id="m-pid">...</div><div class="metric-sub">Process ID</div></div>
   </div>
 
   <div class="divider"></div>
@@ -144,10 +146,10 @@
 
       <div class="card">
         <div class="card-header"><span class="card-title">Hermes Schedule</span><span class="badge b-green">Active</span></div>
-        <div class="row" style="padding:8px 0;"><div style="width:6px;height:6px;border-radius:50%;background:#39d98a;flex-shrink:0;"></div><div class="row-info"><div class="row-title" style="font-size:12px;">Daily CEO Report</div></div><span style="font-size:10px;color:var(--text-muted);">9AM BST</span></div>
-        <div class="row" style="padding:8px 0;"><div style="width:6px;height:6px;border-radius:50%;background:#39d98a;flex-shrink:0;"></div><div class="row-info"><div class="row-title" style="font-size:12px;">Weekly Summary</div></div><span style="font-size:10px;color:var(--text-muted);">Sun 8PM</span></div>
-        <div class="row" style="padding:8px 0;"><div style="width:6px;height:6px;border-radius:50%;background:#f5c518;flex-shrink:0;"></div><div class="row-info"><div class="row-title" style="font-size:12px;">Status Push</div></div><span style="font-size:10px;color:var(--text-muted);">Every 5min</span></div>
-        <div class="row" style="padding:8px 0;border:none;"><div style="width:6px;height:6px;border-radius:50%;background:#ff4d4d;flex-shrink:0;"></div><div class="row-info"><div class="row-title" style="font-size:12px;">CEO Alert (4h+ overdue)</div></div><span style="font-size:10px;color:var(--text-muted);">Auto</span></div>
+        <div class="row" style="padding:8px 0;"><div style="width:6px;height:6px;border-radius:50%;background:#39d98a;flex-shrink:0;"></div><div class="row-info"><div class="row-title" style="font-size:12px;">Daily CEO Report</div><div class="row-sub">Tasks · Projects · Alerts</div></div><span style="font-size:10px;color:var(--text-muted);">9AM BST</span></div>
+        <div class="row" style="padding:8px 0;"><div style="width:6px;height:6px;border-radius:50%;background:#39d98a;flex-shrink:0;"></div><div class="row-info"><div class="row-title" style="font-size:12px;">Weekly Summary</div><div class="row-sub">Revenue · Milestones · Plans</div></div><span style="font-size:10px;color:var(--text-muted);">Sun 8PM</span></div>
+        <div class="row" style="padding:8px 0;"><div style="width:6px;height:6px;border-radius:50%;background:#f5c518;flex-shrink:0;"></div><div class="row-info"><div class="row-title" style="font-size:12px;">Status Push to GitHub</div><div class="row-sub">Updates dashboard live</div></div><span style="font-size:10px;color:var(--text-muted);">Every 5min</span></div>
+        <div class="row" style="padding:8px 0;border:none;"><div style="width:6px;height:6px;border-radius:50%;background:#ff4d4d;flex-shrink:0;"></div><div class="row-info"><div class="row-title" style="font-size:12px;">CEO Alert</div><div class="row-sub">Task overdue 4h+</div></div><span style="font-size:10px;color:var(--text-muted);">Auto</span></div>
       </div>
 
       <div class="card">
@@ -165,81 +167,108 @@
 <script>
 const DASHBOARD_PASS = 'all-in-one-bundle';
 const DATA_URL = 'https://raw.githubusercontent.com/alasifblu/oceanbluCEO/main/hermes-data.json';
-let loggedIn = sessionStorage.getItem('ob-auth') === 'true';
 
-// CLOCK
 function updateClock(){
   const b = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Dhaka'}));
   const p = n => n.toString().padStart(2,'0');
-  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const str = `${days[b.getDay()]} ${b.getDate()} ${months[b.getMonth()]} · ${p(b.getHours())}:${p(b.getMinutes())}:${p(b.getSeconds())} BST`;
-  document.getElementById('clock').textContent = str;
-  document.getElementById('footer-time').textContent = 'Last refresh: ' + str;
+  const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const str=`${days[b.getDay()]} ${b.getDate()} ${months[b.getMonth()]} · ${p(b.getHours())}:${p(b.getMinutes())}:${p(b.getSeconds())} BST`;
+  document.getElementById('clock').textContent=str;
+  document.getElementById('footer-time').textContent='Last refresh: '+str;
 }
-updateClock(); setInterval(updateClock, 1000);
+updateClock(); setInterval(updateClock,1000);
 
-// LOGIN — simple local password check, no proxy needed
 function doLogin(){
-  const pass = document.getElementById('login-pass').value.trim();
-  if(pass === DASHBOARD_PASS){
-    sessionStorage.setItem('ob-auth', 'true');
-    document.getElementById('login-overlay').style.display = 'none';
+  const pass=document.getElementById('login-pass').value.trim();
+  if(pass===DASHBOARD_PASS){
+    sessionStorage.setItem('ob-auth','true');
+    document.getElementById('login-overlay').style.display='none';
     loadData();
   } else {
-    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('login-error').style.display='block';
   }
 }
 
 function doLogout(){
   sessionStorage.removeItem('ob-auth');
-  document.getElementById('login-pass').value = '';
-  document.getElementById('login-overlay').style.display = 'flex';
+  document.getElementById('login-pass').value='';
+  document.getElementById('login-overlay').style.display='flex';
 }
 
-// LOAD DATA FROM GITHUB
 async function loadData(){
   try {
-    const res = await fetch(DATA_URL + '?t=' + Date.now());
+    const res = await fetch(DATA_URL+'?t='+Date.now());
     const d = await res.json();
 
+    // Gateway
     const running = d.gateway_running;
-    document.getElementById('hermes-dot').style.background = running ? '#39d98a' : '#ff4d4d';
-    document.getElementById('hermes-status-text').textContent = running ? 'Hermes Running' : 'Gateway Stopped';
-    document.getElementById('m-gateway').textContent = running ? 'Running' : 'Stopped';
-    document.getElementById('m-gateway').style.color = running ? '#39d98a' : '#ff4d4d';
-    document.getElementById('m-gateway-sub').textContent = d.gateway_state || 'unknown';
-    document.getElementById('m-sessions').textContent = d.active_sessions ?? 0;
-    document.getElementById('m-version').textContent = 'v' + (d.version || '0.16.0');
+    const state = d.gateway_state || 'unknown';
+    document.getElementById('hermes-dot').style.background = running?'#39d98a':'#ff4d4d';
+    document.getElementById('hermes-status-text').textContent = running?'Hermes Running':'Gateway Stopped';
+    document.getElementById('m-gateway').textContent = state.charAt(0).toUpperCase()+state.slice(1);
+    document.getElementById('m-gateway').style.color = running?'#39d98a':'#ff4d4d';
+    document.getElementById('m-gateway-sub').textContent = running?'All systems operational':'Check Railway console';
 
+    // Sessions
+    document.getElementById('m-sessions').textContent = d.active_sessions??0;
+    document.getElementById('m-sessions-sub').textContent = `${d.total_sessions??0} total sessions`;
+
+    // Version
+    document.getElementById('m-version').textContent = 'v'+(d.version||'0.16.0');
+    document.getElementById('m-release').textContent = 'Released '+(d.release_date||'2026.6.5');
+
+    // Discord
     const discord = d.discord_connected;
-    document.getElementById('discord-dot').style.background = discord ? '#39d98a' : '#ff4d4d';
-    document.getElementById('discord-text').textContent = discord ? 'Discord ● Connected' : 'Discord ● Offline';
-    document.getElementById('m-discord').textContent = discord ? 'Connected' : 'Offline';
-    document.getElementById('m-discord').style.color = discord ? '#39d98a' : '#ff4d4d';
+    document.getElementById('discord-dot').style.background = discord?'#39d98a':'#ff4d4d';
+    document.getElementById('discord-text').textContent = discord?'Discord ● Connected':'Discord ● Offline';
+    document.getElementById('m-discord').textContent = discord?'Connected':'Offline';
+    document.getElementById('m-discord').style.color = discord?'#39d98a':'#ff4d4d';
 
-    document.getElementById('m-cron').textContent = d.cron_jobs ?? '1';
-    document.getElementById('m-cron-sub').textContent = 'Active jobs';
+    // Model — show real model from Hermes
+    const model = d.model || 'nvidia/nemotron-3-super-120b-a12b:free';
+    const provider = d.model_provider || 'openrouter';
+    document.getElementById('m-model').textContent = model;
+    document.getElementById('m-provider').textContent = 'via '+provider;
 
-    const updated = d.last_updated_bst || d.last_updated || 'Never';
-    document.getElementById('last-updated').textContent = 'Data pushed: ' + updated;
-    document.getElementById('m-push').textContent = updated;
+    // Cron
+    document.getElementById('m-cron').textContent = d.cron_jobs??0;
+    document.getElementById('m-cron-sub').textContent = (d.cron_enabled??0)+' enabled';
+
+    // Kanban
+    const kt = d.kanban_total??0;
+    const kd = d.kanban_done??0;
+    const kp = d.kanban_in_progress??0;
+    document.getElementById('m-kanban').textContent = kt;
+    document.getElementById('m-kanban-sub').textContent = `${kd} done · ${kp} in progress`;
+
+    // System
+    document.getElementById('m-config').textContent = d.config_version??27;
+    document.getElementById('m-pid').textContent = d.gateway_pid??'N/A';
+
+    // Last push
+    document.getElementById('m-push').textContent = d.last_updated_bst||d.last_updated||'Never';
+    document.getElementById('last-updated').textContent = 'Data pushed: '+(d.last_updated_bst||'N/A');
 
   } catch(e){
     document.getElementById('m-gateway').textContent = 'No data';
-    document.getElementById('last-updated').textContent = 'Could not fetch from GitHub';
+    document.getElementById('m-gateway').style.color = '#ff4d4d';
+    document.getElementById('last-updated').textContent = 'Fetch error — check GitHub repo';
   }
 }
 
-function refreshData(){ if(loggedIn || sessionStorage.getItem('ob-auth')==='true') loadData(); }
+function refreshData(){ if(sessionStorage.getItem('ob-auth')==='true') loadData(); }
 
-if(loggedIn){
-  document.getElementById('login-overlay').style.display = 'none';
+if(sessionStorage.getItem('ob-auth')==='true'){
+  document.getElementById('login-overlay').style.display='none';
   loadData();
 }
 
+// Auto refresh every 5 minutes
+setInterval(()=>{ if(sessionStorage.getItem('ob-auth')==='true') loadData(); }, 15*60*1000);
+
 // TASKS
-let tasks = JSON.parse(localStorage.getItem('ob-tasks')) || [
+let tasks=JSON.parse(localStorage.getItem('ob-tasks'))||[
   {text:'Send NAAAS project kickoff brief',done:false,due:'Today',priority:'critical'},
   {text:'Complete legal registration docs',done:false,due:'This week',priority:'high'},
   {text:'Review Tahsin website bug fix',done:false,due:'ASAP',priority:'high'},
