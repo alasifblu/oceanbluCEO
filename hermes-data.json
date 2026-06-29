@@ -1,10 +1,10 @@
 {
-  "gateway_running": false,
-  "gateway_state": "stopped",
+  "gateway_running": true,
+  "gateway_state": "running",
   "active_sessions": 0,
   "version": "0.16.0",
-  "discord_connected": false,
-  "cron_jobs": 0,
-  "last_updated": "2026-06-29T20:13:30Z",
-  "last_updated_bst": "20:13 BST"
+  "discord_connected": true,
+  "cron_jobs": 1,
+  "last_updated": "2026-06-29T20:15:30Z",
+  "last_updated_bst": "02:15 BST"
 }
