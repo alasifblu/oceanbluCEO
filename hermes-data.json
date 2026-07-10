@@ -1,22 +1,9 @@
 {
   "gateway_running": true,
-  "gateway_state": "running",
-  "active_sessions": 0,
-  "version": "0.16.0",
-  "release_date": "2026.6.5",
-  "config_version": 27,
-  "gateway_pid": null,
-  "discord_connected": false,
-  "discord_updated_at": "",
-  "model": "nvidia/nemotron-3-super-120b-a12b:free",
+  "gateway_state": "active",
+  "active_sessions": 49,
+  "model": "google/gemini-2.5-flash-lite",
   "model_provider": "openrouter",
-  "cron_jobs": 0,
-  "cron_enabled": 0,
-  "total_sessions": 0,
-  "active_in_store": 0,
-  "kanban_total": 0,
-  "kanban_done": 0,
-  "kanban_in_progress": 0,
-  "last_updated": "2026-06-29T20:49:30Z",
-  "last_updated_bst": "02:49 BST"
+  "last_updated": "2026-07-10T08:01:30.586Z",
+  "last_updated_bst": "14:01 BST"
 }
