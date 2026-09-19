@@ -1,9 +1,9 @@
 {
   "gateway_running": true,
   "gateway_state": "active",
-  "active_sessions": 48,
+  "active_sessions": 46,
   "model": "google/gemini-2.5-flash-lite",
   "model_provider": "openrouter",
-  "last_updated": "2026-09-19T15:20:37.069Z",
-  "last_updated_bst": "21:20 BST"
+  "last_updated": "2026-09-19T15:30:37.093Z",
+  "last_updated_bst": "21:30 BST"
 }
